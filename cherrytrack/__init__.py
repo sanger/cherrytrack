@@ -31,6 +31,7 @@ def create_app(test_config=None):
     # import the models here so that flask_migrate knows about them
     import cherrytrack.models  # noqa
 
+    db.init_app(app)
     migrate.init_app(app, db)
 
     from cherrytrack.blueprints import plates, runs
