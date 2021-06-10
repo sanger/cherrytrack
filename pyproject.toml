@@ -1,0 +1,7 @@
+[tool.black]
+line-length = 120
+
+[tool.coverage.run]
+branch = true
+source = ['cherrytrack']
+omit = ['cherrytrack/config/*', 'cherrytrack/blueprints/__init__.py']

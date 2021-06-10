@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask-migrate = "~=3.0"
+pymysql = "~=1.0"
+slackclient = "~=2.9"
+
+[dev-packages]
+black = "*"
+colorlog = "*"
+coverage = {extras = ["toml"], version = "*"}
+flake8 = "*"
+flake8-bugbear = "*"
+mypy = "*"
+pytest = "*"
+pytest-cov = "*"
+python-dotenv = "*"
+
+[requires]
+python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
+
+[scripts]
+black = 'black'
+mypy = 'mypy'
+flake8 = 'flake8'
+test = 'python -m pytest -vx'
