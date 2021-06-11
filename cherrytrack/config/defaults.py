@@ -13,9 +13,9 @@ LOCALHOST = os.environ.get("LOCALHOST", "127.0.0.1")
 ###
 DATABASE_SERVER_HOST = f"{LOCALHOST}"
 DATABASE_SERVER_PORT = 3306
-DATABASE_NAME = "cherrytrack_dev"
 DATABASE_USERNAME = "root"
 DATABASE_PASSWORD = ""
+DATABASE_NAME = "cherrytrack_dev"
 
 ###
 # flask-sqlalchemy config
