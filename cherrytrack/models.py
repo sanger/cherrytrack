@@ -92,7 +92,7 @@ class SourcePlateWell(db.Model):  # type: ignore
 class AutomationSystemRun(db.Model):  # type: ignore
     __tablename__ = "automation_system_runs"
     __table_args__ = (
-        Index("automation_system_run_id", "system_run_id", "automation_system_id", unique=True),
+        Index("automation_system_run_id", "automation_system_id", unique=True),
         {"comment": "This table contains one row per run on an automation system."},
     )
 
@@ -103,7 +103,6 @@ class AutomationSystemRun(db.Model):  # type: ignore
         index=True,
         comment="the foreign key id from the automation systems table",
     )
-    system_run_id = Column(Integer, nullable=False, comment="the run id as used by the workcell software")
     method = Column(
         String(255, "utf8mb4_unicode_ci"),
         nullable=False,

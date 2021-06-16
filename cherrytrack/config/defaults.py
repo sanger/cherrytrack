@@ -13,7 +13,7 @@ LOCALHOST = os.environ.get("LOCALHOST", "127.0.0.1")
 ###
 DATABASE_SERVER_HOST = f"{LOCALHOST}"
 DATABASE_SERVER_PORT = 3306
-DATABASE_NAME = "cherrytrack_dev"
+DATABASE_NAME = "psd_cherrytrack_dev"
 DATABASE_USERNAME = "root"
 DATABASE_PASSWORD = ""
 
@@ -28,3 +28,7 @@ SQLALCHEMY_DATABASE_URI = (
 
 # hide deprecation warning
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+RO_CONN_STRING = f"{DATABASE_USERNAME}@{LOCALHOST}"
+AUTOMATION_SYSTEM_RUNS_TABLE = "automation_system_runs"
+AUTOMATION_SYSTEM_TABLE = "automation_systems"

@@ -45,7 +45,7 @@ Install the require dependencies:
 
 Create the following database (currently manually):
 
-- `cherrytrack_dev`
+- `psd_cherrytrack_dev`
 
 ## Running
 
@@ -59,7 +59,7 @@ To run the application:
 
 Create the following database (currently manually):
 
-- `cherrytrack_test`
+- `psd_cherrytrack_test`
 
 ### Running Tests
 

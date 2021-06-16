@@ -11,7 +11,7 @@ TESTING = True
 ###
 # Database config
 ###
-DATABASE_NAME = "cherrytrack_test"
+DATABASE_NAME = "psd_cherrytrack_test"
 
 ###
 # flask-sqlalchemy config
