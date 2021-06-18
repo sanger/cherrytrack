@@ -31,4 +31,6 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 RO_CONN_STRING = f"{DATABASE_USERNAME}@{LOCALHOST}"
 AUTOMATION_SYSTEM_RUNS_TABLE = "automation_system_runs"
-AUTOMATION_SYSTEM_TABLE = "automation_systems"
+AUTOMATION_SYSTEMS_TABLE = "automation_systems"
+SOURCE_PLATE_WELLS_TABLE = "source_plate_wells"
+DESTINATION_PLATE_WELLS_TABLE = "destination_plate_wells"
