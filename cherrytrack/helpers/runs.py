@@ -8,6 +8,18 @@ logger = logging.getLogger(__name__)
 
 
 def get_run_info(id):
+    run = get_automation_system_run_for_id(id)
+
+    automation_system = get_automation_system_for_id(run.automation_system_id)
+
+    return {
+        "id": run.id,
+        "user_id": run.user_id,
+        "liquid_handler_serial_number": automation_system.liquid_handler_serial_number,
+    }
+
+
+def get_automation_system_run_for_id(id):
     # assign db_connection to avoid UnboundLocalError in 'finally' block, in case of exception
     db_connection = None
 
@@ -17,36 +29,21 @@ def get_run_info(id):
         stmt = select(AutomationSystemRun).where(AutomationSystemRun.id == id)
 
         db_connection = sql_engine.connect()
+
         results = db_connection.execute(stmt)
-
-        # assuming result.rowcount == 1
         rows_matched = results.rowcount
-
         if rows_matched != 1:
-            msg = f"Failed to find a automation system run with id {id}"
-            logger.error(msg)
-
-            raise Exception(msg)
-
-        run = results.all()[0]
-
-        automation_system = get_automation_systems_info(run.automation_system_id)
-
-        return {
-            "id": run.id,
-            "user_id": run.user_id,
-            "liquid_handler_serial_number": automation_system.liquid_handler_serial_number,
-        }
+            raise Exception(f"Failed to find a automation system run with id {id}")
+        return results.all()[0]
     except Exception as e:
-        logger.error(f"Failed to get automation system runs info for id {id}: {e}")
-
+        logger.error(e)
         raise
     finally:
         if db_connection is not None:
             db_connection.close()
 
 
-def get_automation_systems_info(id):
+def get_automation_system_for_id(id):
     # assign db_connection to avoid UnboundLocalError in 'finally' block, in case of exception
     db_connection = None
 
@@ -58,10 +55,12 @@ def get_automation_systems_info(id):
         db_connection = sql_engine.connect()
 
         results = db_connection.execute(stmt)
-
+        rows_matched = results.rowcount
+        if rows_matched != 1:
+            raise Exception(f"Failed to find a automation system with id {id}")
         return results.all()[0]
     except Exception as e:
-        logger.error(f"Failed to get automation systems info for id {id}: {e}")
+        logger.error(e)
         raise
     finally:
         if db_connection is not None:

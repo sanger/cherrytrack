@@ -4,6 +4,7 @@ from http import HTTPStatus
 def test_get_source_plates(
     app,
     client,
+    automation_systems,
     runs,
     source_plate_wells,
     destination_plate_wells,

@@ -2,12 +2,13 @@ import os
 import pytest
 from cherrytrack import create_app
 from cherrytrack.helpers.mysql import create_mysql_connection_engine, get_table
-from cherrytrack.models import AutomationSystemRun, SourcePlateWell, DestinationPlateWell
+from cherrytrack.models import AutomationSystemRun, AutomationSystem, SourcePlateWell, DestinationPlateWell
 from sqlalchemy import select
 from sqlalchemy.sql import text
 from tests.fixtures.data.runs import RUNS
 from tests.fixtures.data.source_plate_wells import SOURCE_PLATE_WELLS
 from tests.fixtures.data.destination_plate_wells import DESTINATION_PLATE_WELLS
+from tests.fixtures.data.automation_systems import AUTOMATION_SYSTEMS
 
 
 @pytest.fixture
@@ -43,6 +44,28 @@ def runs(app, sql_engine):
             connection.execute(table.insert(), RUNS)
 
             stmt = select(AutomationSystemRun)
+            inserted_data = connection.execute(stmt)
+
+        #  yield the inserted data
+        yield inserted_data.all()
+
+    finally:  # clear up after the fixture is used
+        delete_data(sql_engine, table_name)
+
+
+@pytest.fixture
+def automation_systems(app, sql_engine):
+    try:
+        table_name = app.config["AUTOMATION_SYSTEMS_TABLE"]
+        delete_data(sql_engine, table_name)
+
+        inserted_data = []
+        with sql_engine.begin() as connection:
+            print("Inserting test data")
+            table = get_table(sql_engine, table_name)
+            connection.execute(table.insert(), AUTOMATION_SYSTEMS)
+
+            stmt = select(AutomationSystem)
             inserted_data = connection.execute(stmt)
 
         #  yield the inserted data
