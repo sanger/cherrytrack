@@ -41,10 +41,7 @@ def get_samples_for_source_plate(source_barcode):
         rows_matched = results.rowcount
 
         if rows_matched == 0:
-            msg = f"Failed to find samples for source plate barcode {source_barcode}"
-            logger.error(msg)
-
-            raise Exception(msg)
+            raise Exception(f"Failed to find samples for source plate barcode {source_barcode}")
 
         samples = []
         for row in results:
@@ -66,8 +63,7 @@ def get_samples_for_source_plate(source_barcode):
 
         return samples
     except Exception as e:
-        logger.error(f"Failed to get samples for source plate barcode {source_barcode}: {e}")
-
+        logger.error(e)
         raise
     finally:
         if db_connection is not None:

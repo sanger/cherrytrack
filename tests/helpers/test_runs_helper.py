@@ -1,8 +1,5 @@
-from http import HTTPStatus
-
-from pytest import raises
-
 from cherrytrack.helpers.runs import get_run_info, get_automation_system_for_id, get_automation_system_run_for_id
+from pytest import raises
 
 
 def find_automation_system(run, automation_systems):

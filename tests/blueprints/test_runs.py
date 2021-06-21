@@ -17,8 +17,6 @@ def test_get_automation_system_runs_endpoint_successful(app, client):
 
 def test_get_automation_system_runs_endpoint_get_run_info_fails(app, client):
     with app.app_context():
-        run_info = {"id": 1, "user_id": "ab1", "liquid_handler_serial_number": "LHS000001"}
-
         with patch("cherrytrack.blueprints.runs.get_run_info", side_effect=Exception()):
 
             response = client.get("/automation-system-runs/1")
