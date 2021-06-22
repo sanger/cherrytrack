@@ -16,6 +16,8 @@ def get_run_info(id):
         "id": run.id,
         "user_id": run.user_id,
         "liquid_handler_serial_number": automation_system.liquid_handler_serial_number,
+        "automation_system_name": automation_system.automation_system_name,
+        "automation_system_manufacturer": automation_system.automation_system_manufacturer,
     }
 
 

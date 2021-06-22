@@ -17,6 +17,10 @@ def test_get_run_info(app, client, automation_systems, runs):
             "liquid_handler_serial_number": find_automation_system(
                 run, automation_systems
             ).liquid_handler_serial_number,
+            "automation_system_name": find_automation_system(run, automation_systems).automation_system_name,
+            "automation_system_manufacturer": find_automation_system(
+                run, automation_systems
+            ).automation_system_manufacturer,
         }
         assert result == expected_result
 
