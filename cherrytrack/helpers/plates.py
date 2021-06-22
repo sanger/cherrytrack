@@ -68,3 +68,7 @@ def get_samples_for_source_plate(source_barcode):
     finally:
         if db_connection is not None:
             db_connection.close()
+
+
+def get_wells_for_destination_plate(destination_barcode):
+    logger.info("Attempting to get samples from source_plate_wells with the source barcode")

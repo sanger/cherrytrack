@@ -64,3 +64,28 @@ def test_get_source_plates_endpoint_no_source_barcode(app, client):
         response = client.get("/source-plates")
 
         assert response.status_code == HTTPStatus.NOT_FOUND
+
+
+def test_get_destination_plates_endpoint_successful_fails(app, client):
+    with app.app_context():
+        with patch("cherrytrack.blueprints.plates.get_wells_for_destination_plate", side_effect=Exception()):
+
+            response = client.get("/destination-plates/aUnknownBarcode")
+
+            assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
+
+            assert response.json == {"errors": ["Failed to get wells for the given destination plate barcode."]}
+
+
+# def test_get_destination_plates_endpoint_unknown_destination_barcode(app, client):
+#     with app.app_context():
+#         destination_barcode = "aUnknownBarcode"
+#         response = client.get(f"/destination-plates/{destination_barcode}")
+#         assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
+
+
+def test_get_destination_plates_endpoint_no_destination_barcode(app, client):
+    with app.app_context():
+        response = client.get("/destination-plates")
+
+        assert response.status_code == HTTPStatus.NOT_FOUND
