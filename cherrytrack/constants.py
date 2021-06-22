@@ -1,8 +1,5 @@
 from typing import Final
 
-# general
-# ERROR_UNEXPECTED: Final[str] = "An unexpected error occurred"
-# ERROR_MISSING_PARAMETERS: Final[str] = "missing required parameters"
 ERROR_GET_AUTOMATION_SYSTEM_RUN_INFO: Final[str] = "Failed to get automation system run info for the given run id"
 ERROR_GET_SAMPLES_FOR_SOURCE_PLATES: Final[str] = "Failed to get samples for the given source plate barcode."
 ERROR_GET_SAMPLES_FOR_DESTINATION_PLATES: Final[str] = "Failed to get wells for the given destination plate barcode."

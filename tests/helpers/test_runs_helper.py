@@ -2,10 +2,6 @@ from cherrytrack.helpers.runs import get_run_info, get_automation_system_for_id,
 from pytest import raises
 
 
-def find_automation_system(run, automation_systems):
-    return next((system for system in automation_systems if run.automation_system_id == system.id), None)
-
-
 def test_get_run_info(app, client, automation_systems, runs):
     with app.app_context():
         run = runs[0]
@@ -23,6 +19,10 @@ def test_get_run_info(app, client, automation_systems, runs):
             ).automation_system_manufacturer,
         }
         assert result == expected_result
+
+
+def find_automation_system(run, automation_systems):
+    return next((system for system in automation_systems if run.automation_system_id == system.id), None)
 
 
 def test_get_run_info_failed(app, client):

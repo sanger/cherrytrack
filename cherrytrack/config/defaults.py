@@ -30,7 +30,7 @@ SQLALCHEMY_DATABASE_URI = (
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 RO_CONN_STRING = f"{DATABASE_USERNAME}@{LOCALHOST}"
-AUTOMATION_SYSTEM_RUNS_TABLE = "automation_system_runs"
-AUTOMATION_SYSTEMS_TABLE = "automation_systems"
-SOURCE_PLATE_WELLS_TABLE = "source_plate_wells"
-DESTINATION_PLATE_WELLS_TABLE = "destination_plate_wells"
+TABLE_AUTOMATION_SYSTEM_RUNS = "automation_system_runs"
+TABLE_AUTOMATION_SYSTEMS = "automation_systems"
+TABLE_SOURCE_PLATE_WELLS = "source_plate_wells"
+TABLE_DESTINATION_PLATE_WELLS = "destination_plate_wells"

@@ -62,6 +62,6 @@ def test_get_samples_for_source_plate_failed(app):
         exception = ""
         with raises(Exception) as e:
             exception = e
-            get_samples_for_source_plate("aUnknownBarcode")
+            get_samples_for_source_plate("anUnknownBarcode")
 
-        assert "Failed to find samples for source plate barcode aUnknownBarcode" == str(exception.value)
+        assert "Failed to find samples for source plate barcode anUnknownBarcode" == str(exception.value)

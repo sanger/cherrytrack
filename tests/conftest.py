@@ -34,7 +34,7 @@ def sql_engine(app):
 @pytest.fixture
 def runs(app, sql_engine):
     try:
-        table_name = app.config["AUTOMATION_SYSTEM_RUNS_TABLE"]
+        table_name = app.config["TABLE_AUTOMATION_SYSTEM_RUNS"]
         delete_data(sql_engine, table_name)
 
         inserted_data = []
@@ -56,7 +56,7 @@ def runs(app, sql_engine):
 @pytest.fixture
 def automation_systems(app, sql_engine):
     try:
-        table_name = app.config["AUTOMATION_SYSTEMS_TABLE"]
+        table_name = app.config["TABLE_AUTOMATION_SYSTEMS"]
         delete_data(sql_engine, table_name)
 
         inserted_data = []
@@ -78,7 +78,7 @@ def automation_systems(app, sql_engine):
 @pytest.fixture
 def source_plate_wells(app, sql_engine):
     try:
-        table_name = app.config["SOURCE_PLATE_WELLS_TABLE"]
+        table_name = app.config["TABLE_SOURCE_PLATE_WELLS"]
         delete_data(sql_engine, table_name)  # delete all rows from table first
 
         inserted_data = []
@@ -100,7 +100,7 @@ def source_plate_wells(app, sql_engine):
 @pytest.fixture
 def destination_plate_wells(app, sql_engine):
     try:
-        table_name = app.config["DESTINATION_PLATE_WELLS_TABLE"]
+        table_name = app.config["TABLE_DESTINATION_PLATE_WELLS"]
         delete_data(sql_engine, table_name)  # delete all rows from table first
 
         inserted_data = []

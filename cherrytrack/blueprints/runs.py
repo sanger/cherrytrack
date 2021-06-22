@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 bp = Blueprint("runs", __name__)
 
 
-@bp.get("/automation-system-runs/<string:id>")
+@bp.get("/automation-system-runs/<int:id>")
 def get_automation_system_runs(id: int) -> FlaskResponse:
     logger.debug("Getting automation system run info...")
     try:
