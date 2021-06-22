@@ -25,7 +25,8 @@ def get_source_plates(barcode: str) -> FlaskResponse:
     logger.debug("Getting source plate info...")
 
     try:
-        return ok(data=get_samples_for_source_plate(barcode))
+        reponse = {"barcode": barcode, "samples": get_samples_for_source_plate(barcode)}
+        return ok(data=reponse)
     except Exception as e:
         logger.exception(e)
 
