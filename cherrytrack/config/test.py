@@ -14,14 +14,6 @@ TESTING = True
 DATABASE_NAME = "psd_cherrytrack_test"
 
 ###
-# flask-sqlalchemy config
-# https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/
-###
-SQLALCHEMY_DATABASE_URI = (
-    f"{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_SERVER_HOST}:{DATABASE_SERVER_PORT}/{DATABASE_NAME}"
-)
-
-###
 # logging config
 ###
 LOGGING["loggers"]["cherrytrack"]["level"] = "DEBUG"

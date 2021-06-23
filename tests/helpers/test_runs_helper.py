@@ -39,19 +39,7 @@ def test_get_automation_system_run_for_id(app, client, automation_systems, runs)
     with app.app_context():
         run = runs[0]
         result = get_automation_system_run_for_id(run.id)
-
-        expected_result = (
-            run.id,
-            run.automation_system_id,
-            run.method,
-            run.user_id,
-            run.start_time,
-            run.end_time,
-            run.state,
-            run.created_at,
-            run.updated_at,
-        )
-        assert result == expected_result
+        assert result == run
 
 
 def test_get_automation_system_run_for_id_failed(app, client):
@@ -68,17 +56,7 @@ def test_get_automation_system_for_id(app, client, automation_systems):
     with app.app_context():
         automation_system = automation_systems[0]
         result = get_automation_system_for_id(automation_system.id)
-
-        expected_result = (
-            automation_system.id,
-            automation_system.automation_system_name,
-            automation_system.automation_system_manufacturer,
-            automation_system.liquid_handler_serial_number,
-            automation_system.created_at,
-            automation_system.updated_at,
-        )
-
-        assert result == expected_result
+        assert result == automation_system
 
 
 def test_get_automation_system_for_id_failed(app):
@@ -87,5 +65,4 @@ def test_get_automation_system_for_id_failed(app):
         with raises(Exception) as e:
             exception = e
             get_automation_system_for_id(1)
-
         assert "Failed to find a automation system with id 1" == str(exception.value)

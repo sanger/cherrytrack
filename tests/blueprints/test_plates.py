@@ -12,7 +12,7 @@ def test_get_source_plates_endpoint_successful(
 ):
     with app.app_context():
         source_plate = source_plate_wells[0]
-        response = client.get(f"/source-plates/{source_plate['barcode']}")
+        response = client.get(f"/source-plates/{source_plate.barcode}")
 
         assert response.status_code == HTTPStatus.OK
         assert len(response.json["data"]["samples"]) == 3
@@ -24,15 +24,15 @@ def test_get_source_plates_endpoint_successful(
         assert response.json["data"]["samples"][0]["sample_id"] == source_plate.sample_id
         assert response.json["data"]["samples"][0]["rna_id"] == source_plate.rna_id
         assert response.json["data"]["samples"][0]["lab_id"] == source_plate.lab_id
-        assert response.json["data"]["samples"][0]["destination_plate_well_id"] == "1"
+        assert response.json["data"]["samples"][0]["destination_plate_well_id"] == 1
         assert response.json["data"]["samples"][0]["destination_barcode"] == "DS000010021"
         assert response.json["data"]["samples"][0]["destination_coordinate"] == "A2"
-        assert response.json["data"]["samples"][0]["automation_system_run_id"] == "1"
+        assert response.json["data"]["samples"][0]["automation_system_run_id"] == 1
         assert response.json["data"]["samples"][0]["picked"] is True
-        assert response.json["data"]["samples"][1]["destination_plate_well_id"] == "3"
+        assert response.json["data"]["samples"][1]["destination_plate_well_id"] == 3
         assert response.json["data"]["samples"][1]["destination_barcode"] == "DS000010021"
         assert response.json["data"]["samples"][1]["destination_coordinate"] == "C4"
-        assert response.json["data"]["samples"][1]["automation_system_run_id"] == "1"
+        assert response.json["data"]["samples"][1]["automation_system_run_id"] == 1
         assert response.json["data"]["samples"][1]["picked"] is True
         assert response.json["data"]["samples"][2]["destination_plate_well_id"] == ""
         assert response.json["data"]["samples"][2]["destination_barcode"] == ""
