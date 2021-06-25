@@ -20,4 +20,18 @@ DESTINATION_PLATE_WELLS = [
         "source_plate_well_id": 3,
         "control_plate_well_id": None,
     },
+    {
+        "barcode": "DS000010021",
+        "coordinate": "A1",
+        "automation_system_run_id": 1,
+        "source_plate_well_id": None,
+        "control_plate_well_id": 1,
+    },
+    {
+        "barcode": "DS000010021",
+        "coordinate": "E3",
+        "automation_system_run_id": 1,
+        "source_plate_well_id": None,
+        "control_plate_well_id": None,
+    },
 ]

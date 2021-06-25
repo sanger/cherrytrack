@@ -19,6 +19,7 @@ def get_destination_plates(barcode: str) -> FlaskResponse:
     logger.debug("Getting destination plate info...")
 
     try:
+        # change samples to wells in PostMan
         response = {"barcode": barcode, "wells": get_wells_for_destination_plate(barcode)}
         return ok(data=response)
     except Exception as e:

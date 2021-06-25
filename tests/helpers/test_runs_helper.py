@@ -5,24 +5,16 @@ from pytest import raises
 def test_get_run_info(app, client, automation_systems, runs):
     with app.app_context():
         run = runs[0]
-        result = get_run_info(run.id)
+        actual = get_run_info(run.id)
 
-        expected_result = {
+        expected = {
             "id": run.id,
             "user_id": run.user_id,
-            "liquid_handler_serial_number": find_automation_system(
-                run, automation_systems
-            ).liquid_handler_serial_number,
-            "automation_system_name": find_automation_system(run, automation_systems).automation_system_name,
-            "automation_system_manufacturer": find_automation_system(
-                run, automation_systems
-            ).automation_system_manufacturer,
+            "liquid_handler_serial_number": "LHS000001",
+            "automation_system_name": "CPA",
+            "automation_system_manufacturer": "biosero",
         }
-        assert result == expected_result
-
-
-def find_automation_system(run, automation_systems):
-    return next((system for system in automation_systems if run.automation_system_id == system.id), None)
+        assert actual == expected
 
 
 def test_get_run_info_failed(app, client):
@@ -38,8 +30,8 @@ def test_get_run_info_failed(app, client):
 def test_get_automation_system_run_for_id(app, client, automation_systems, runs):
     with app.app_context():
         run = runs[0]
-        result = get_automation_system_run_for_id(run.id)
-        assert result == run
+        actual = get_automation_system_run_for_id(run.id)
+        assert actual == run
 
 
 def test_get_automation_system_run_for_id_failed(app, client):
@@ -55,8 +47,8 @@ def test_get_automation_system_run_for_id_failed(app, client):
 def test_get_automation_system_for_id(app, client, automation_systems):
     with app.app_context():
         automation_system = automation_systems[0]
-        result = get_automation_system_for_id(automation_system.id)
-        assert result == automation_system
+        actual = get_automation_system_for_id(automation_system.id)
+        assert actual == automation_system
 
 
 def test_get_automation_system_for_id_failed(app):

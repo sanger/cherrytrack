@@ -1,7 +1,7 @@
 SOURCE_PLATE_WELLS = [
     {
         "barcode": "DS000010001",
-        "coordinate": "A2",
+        "coordinate": "C3",
         "sample_id": "487e1b70-ad22-4716-a913-1001bc89d559",
         "lab_id": "MK",
         "rna_id": "RNA-S-00001-00000008",

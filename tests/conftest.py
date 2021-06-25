@@ -2,11 +2,20 @@ import os
 import pytest
 from cherrytrack import db, create_app
 
-from cherrytrack.models import AutomationSystemRun, AutomationSystem, SourcePlateWell, DestinationPlateWell
+from cherrytrack.models import (
+    AutomationSystemRun,
+    AutomationSystem,
+    SourcePlateWell,
+    DestinationPlateWell,
+    ControlPlateWell,
+)
+
+ControlPlateWell
 from sqlalchemy.sql import text
 from tests.fixtures.data.runs import RUNS
 from tests.fixtures.data.source_plate_wells import SOURCE_PLATE_WELLS
 from tests.fixtures.data.destination_plate_wells import DESTINATION_PLATE_WELLS
+from tests.fixtures.data.control_plate_well import CONTROL_PLATE_WELLS
 from tests.fixtures.data.automation_systems import AUTOMATION_SYSTEMS
 
 
@@ -26,24 +35,7 @@ def client(app):
 
 
 @pytest.fixture
-def runs(app):
-
-    with app.app_context():
-        try:
-            for run in RUNS:
-                db.session.add(AutomationSystemRun(**run))
-            db.session.commit()
-
-            #  yield the inserted data
-            yield AutomationSystemRun.query.all()
-
-        finally:
-            delete_data(AutomationSystemRun, app.config["TABLE_AUTOMATION_SYSTEM_RUNS"])
-
-
-@pytest.fixture
 def automation_systems(app):
-
     with app.app_context():
         try:
             for system in AUTOMATION_SYSTEMS:
@@ -58,8 +50,22 @@ def automation_systems(app):
 
 
 @pytest.fixture
-def source_plate_wells(app):
+def runs(app):
+    with app.app_context():
+        try:
+            for run in RUNS:
+                db.session.add(AutomationSystemRun(**run))
+            db.session.commit()
 
+            #  yield the inserted data
+            yield AutomationSystemRun.query.all()
+
+        finally:
+            delete_data(AutomationSystemRun, app.config["TABLE_AUTOMATION_SYSTEM_RUNS"])
+
+
+@pytest.fixture
+def source_plate_wells(app):
     with app.app_context():
         try:
             for spw in SOURCE_PLATE_WELLS:
@@ -71,6 +77,21 @@ def source_plate_wells(app):
 
         finally:
             delete_data(SourcePlateWell, app.config["TABLE_SOURCE_PLATE_WELLS"])
+
+
+@pytest.fixture
+def control_plate_wells(app):
+    with app.app_context():
+        try:
+            for cpw in CONTROL_PLATE_WELLS:
+                db.session.add(ControlPlateWell(**cpw))
+            db.session.commit()
+
+            #  yield the inserted data
+            yield ControlPlateWell.query.all()
+
+        finally:
+            delete_data(ControlPlateWell, app.config["TABLE_CONTROL_PLATE_WELLS"])
 
 
 @pytest.fixture

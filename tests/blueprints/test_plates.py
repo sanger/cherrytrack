@@ -8,6 +8,7 @@ def test_get_source_plates_endpoint_successful(
     automation_systems,
     runs,
     source_plate_wells,
+    control_plate_wells,
     destination_plate_wells,
 ):
     with app.app_context():
@@ -17,28 +18,6 @@ def test_get_source_plates_endpoint_successful(
         assert response.status_code == HTTPStatus.OK
         assert len(response.json["data"]["samples"]) == 3
         assert response.json["data"]["barcode"] == source_plate.barcode
-        assert response.json["data"]["barcode"] == source_plate.barcode
-        assert response.json["data"]["samples"][0]["source_plate_well_id"] == source_plate.id
-        assert response.json["data"]["samples"][0]["source_barcode"] == source_plate.barcode
-        assert response.json["data"]["samples"][0]["source_coordinate"] == source_plate.coordinate
-        assert response.json["data"]["samples"][0]["sample_id"] == source_plate.sample_id
-        assert response.json["data"]["samples"][0]["rna_id"] == source_plate.rna_id
-        assert response.json["data"]["samples"][0]["lab_id"] == source_plate.lab_id
-        assert response.json["data"]["samples"][0]["destination_plate_well_id"] == 1
-        assert response.json["data"]["samples"][0]["destination_barcode"] == "DS000010021"
-        assert response.json["data"]["samples"][0]["destination_coordinate"] == "A2"
-        assert response.json["data"]["samples"][0]["automation_system_run_id"] == 1
-        assert response.json["data"]["samples"][0]["picked"] is True
-        assert response.json["data"]["samples"][1]["destination_plate_well_id"] == 3
-        assert response.json["data"]["samples"][1]["destination_barcode"] == "DS000010021"
-        assert response.json["data"]["samples"][1]["destination_coordinate"] == "C4"
-        assert response.json["data"]["samples"][1]["automation_system_run_id"] == 1
-        assert response.json["data"]["samples"][1]["picked"] is True
-        assert response.json["data"]["samples"][2]["destination_plate_well_id"] == ""
-        assert response.json["data"]["samples"][2]["destination_barcode"] == ""
-        assert response.json["data"]["samples"][2]["destination_coordinate"] == ""
-        assert response.json["data"]["samples"][2]["automation_system_run_id"] == ""
-        assert response.json["data"]["samples"][2]["picked"] is False
 
 
 def test_get_source_plates_endpoint_successful_fails(app, client):
@@ -66,7 +45,31 @@ def test_get_source_plates_endpoint_no_source_barcode(app, client):
         assert response.status_code == HTTPStatus.NOT_FOUND
 
 
-def test_get_destination_plates_endpoint_successful_fails(app, client):
+def test_get_destination_plates_endpoint_successful(
+    app,
+    client,
+    automation_systems,
+    runs,
+    source_plate_wells,
+    control_plate_wells,
+    destination_plate_wells,
+):
+    with app.app_context():
+        destination_plate = destination_plate_wells[0]
+        response = client.get(f"/destination-plates/{destination_plate.barcode}")
+
+        assert response.status_code == HTTPStatus.OK
+        assert len(response.json["data"]["wells"]) == 5
+
+        assert response.json["data"]["barcode"] == destination_plate.barcode
+        assert response.json["data"]["wells"][0]["type"] == "sample"
+        assert response.json["data"]["wells"][1]["type"] == "sample"
+        assert response.json["data"]["wells"][2]["type"] == "sample"
+        assert response.json["data"]["wells"][3]["type"] == "control"
+        assert response.json["data"]["wells"][4]["type"] == "empty"
+
+
+def test_get_destination_plates_endpoint_fails(app, client):
     with app.app_context():
         with patch("cherrytrack.blueprints.plates.get_wells_for_destination_plate", side_effect=Exception()):
 
@@ -77,11 +80,11 @@ def test_get_destination_plates_endpoint_successful_fails(app, client):
             assert response.json == {"errors": ["Failed to get wells for the given destination plate barcode."]}
 
 
-# def test_get_destination_plates_endpoint_unknown_destination_barcode(app, client):
-#     with app.app_context():
-#         destination_barcode = "anUnknownBarcode"
-#         response = client.get(f"/destination-plates/{destination_barcode}")
-#         assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
+def test_get_destination_plates_endpoint_unknown_destination_barcode(app, client):
+    with app.app_context():
+        destination_barcode = "anUnknownBarcode"
+        response = client.get(f"/destination-plates/{destination_barcode}")
+        assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
 
 
 def test_get_destination_plates_endpoint_no_destination_barcode(app, client):
