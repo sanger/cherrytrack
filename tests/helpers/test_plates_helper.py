@@ -25,7 +25,7 @@ def test_get_samples_for_source_plate_successful(
                 "source_coordinate": "C3",
                 "rna_id": "RNA-S-00001-00000008",
                 "lab_id": "MK",
-                "sample_id": "487e1b70-ad22-4716-a913-1001bc89d559",
+                "lh_sample_uuid": "487e1b70-ad22-4716-a913-1001bc89d559",
             },
             {
                 "automation_system_run_id": 1,
@@ -37,7 +37,7 @@ def test_get_samples_for_source_plate_successful(
                 "source_coordinate": "A5",
                 "rna_id": "RNA-S-00001-00000001",
                 "lab_id": "MK",
-                "sample_id": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
+                "lh_sample_uuid": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
             },
             {
                 "automation_system_run_id": "",
@@ -49,7 +49,7 @@ def test_get_samples_for_source_plate_successful(
                 "source_coordinate": "B2",
                 "rna_id": "RNA-S-00001-00000009",
                 "lab_id": "MK",
-                "sample_id": "c068cfea-02be-4aec-a50d-631abcd34573",
+                "lh_sample_uuid": "c068cfea-02be-4aec-a50d-631abcd34573",
             },
         ]
 
@@ -89,7 +89,7 @@ def test_get_wells_for_destination_plate_successful(
                 "source_coordinate": "C3",
                 "rna_id": "RNA-S-00001-00000008",
                 "lab_id": "MK",
-                "sample_id": "487e1b70-ad22-4716-a913-1001bc89d559",
+                "lh_sample_uuid": "487e1b70-ad22-4716-a913-1001bc89d559",
             },
             {
                 "automation_system_run_id": 1,
@@ -99,7 +99,7 @@ def test_get_wells_for_destination_plate_successful(
                 "source_coordinate": "A5",
                 "rna_id": "RNA-S-00001-00000001",
                 "lab_id": "MK",
-                "sample_id": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
+                "lh_sample_uuid": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
             },
             {
                 "automation_system_run_id": "1",
@@ -109,7 +109,7 @@ def test_get_wells_for_destination_plate_successful(
                 "source_coordinate": "B2",
                 "rna_id": "RNA-S-00001-00000009",
                 "lab_id": "MK",
-                "sample_id": "c068cfea-02be-4aec-a50d-631abcd34573",
+                "lh_sample_uuid": "c068cfea-02be-4aec-a50d-631abcd34573",
             },
             {
                 "automation_system_run_id": "1",

@@ -93,7 +93,7 @@ def get_well_content(row):
             "source_coordinate": row.source_coordinate,
             "rna_id": row.rna_id,
             "lab_id": row.lab_id,
-            "sample_id": row.sample_id,
+            "lh_sample_uuid": row.sample_id,
         }
     if getattr(row, "control_plate_well_id", ""):
         return {
