@@ -25,7 +25,7 @@ def get_destination_plates(barcode: str) -> FlaskResponse:
     except Exception as e:
         logger.exception(e)
 
-        return internal_server_error(ERROR_GET_SAMPLES_FOR_DESTINATION_PLATES)
+        return internal_server_error(f"{ERROR_GET_SAMPLES_FOR_DESTINATION_PLATES} {e}")
 
 
 @bp.get("/source-plates/<string:barcode>")
@@ -38,4 +38,4 @@ def get_source_plates(barcode: str) -> FlaskResponse:
     except Exception as e:
         logger.exception(e)
 
-        return internal_server_error(ERROR_GET_SAMPLES_FOR_SOURCE_PLATES)
+        return internal_server_error(f"{ERROR_GET_SAMPLES_FOR_SOURCE_PLATES} {e}")

@@ -19,4 +19,4 @@ def get_automation_system_runs(id: int) -> FlaskResponse:
     except Exception as e:
         logger.exception(e)
 
-        return internal_server_error(ERROR_GET_AUTOMATION_SYSTEM_RUN_INFO)
+        return internal_server_error(f"{ERROR_GET_AUTOMATION_SYSTEM_RUN_INFO} {e}")

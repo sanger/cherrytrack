@@ -1,8 +1,8 @@
 from typing import Final
 
-ERROR_GET_AUTOMATION_SYSTEM_RUN_INFO: Final[str] = "Failed to get automation system run info for the given run id"
-ERROR_GET_SAMPLES_FOR_SOURCE_PLATES: Final[str] = "Failed to get samples for the given source plate barcode."
-ERROR_GET_SAMPLES_FOR_DESTINATION_PLATES: Final[str] = "Failed to get wells for the given destination plate barcode."
+ERROR_GET_AUTOMATION_SYSTEM_RUN_INFO: Final[str] = "Failed to get automation system run info:"
+ERROR_GET_SAMPLES_FOR_SOURCE_PLATES: Final[str] = "Failed to get source plate info:"
+ERROR_GET_SAMPLES_FOR_DESTINATION_PLATES: Final[str] = "Failed to get destination plate info:"
 COORDINATES = (
     "A1",
     "A2",

@@ -28,7 +28,7 @@ def test_get_source_plates_endpoint_successful_fails(app, client):
 
             assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
 
-            assert response.json == {"errors": ["Failed to get samples for the given source plate barcode."]}
+            assert response.json == {"errors": ["Failed to get source plate info: "]}
 
 
 def test_get_source_plates_endpoint_unknown_source_barcode(app, client):
@@ -77,13 +77,19 @@ def test_get_destination_plates_endpoint_fails(app, client):
 
             assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
 
-            assert response.json == {"errors": ["Failed to get wells for the given destination plate barcode."]}
+            assert response.json == {"errors": ["Failed to get destination plate info: "]}
 
 
 def test_get_destination_plates_endpoint_unknown_destination_barcode(app, client):
     with app.app_context():
         destination_barcode = "anUnknownBarcode"
         response = client.get(f"/destination-plates/{destination_barcode}")
+        assert response.json == {
+            "errors": [
+                "Failed to get destination plate info: Failed to find wells for destination plate barcode anUnknownBarcode"
+            ]
+        }
+
         assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
 
 

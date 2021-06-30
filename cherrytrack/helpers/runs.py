@@ -26,6 +26,8 @@ def get_automation_system_run_for_id(id):
 
 def get_automation_system_for_id(id):
     automation_system = AutomationSystem.query.filter_by(id=id).first()
+    # below maybe not needed as foreign key constraint would prevent
+    # run from being created if no automation system exists?
     if automation_system is None:
         raise Exception(f"Failed to find a automation system with id {id}")
     return automation_system
