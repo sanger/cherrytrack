@@ -86,7 +86,10 @@ def test_get_destination_plates_endpoint_unknown_destination_barcode(app, client
         response = client.get(f"/destination-plates/{destination_barcode}")
         assert response.json == {
             "errors": [
-                "Failed to get destination plate info: Failed to find wells for destination plate barcode anUnknownBarcode"
+                (
+                    "Failed to get destination plate info: Failed to find wells for destination "
+                    "plate barcode anUnknownBarcode"
+                )
             ]
         }
 

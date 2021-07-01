@@ -1,18 +1,16 @@
 # coding: utf-8
 from sqlalchemy import (
-    BigInteger,
     CheckConstraint,
     Column,
     DateTime,
-    Enum,
     ForeignKey,
     Index,
     Integer,
     JSON,
     String,
-    Table,
     text,
 )
+
 from sqlalchemy.dialects.mysql import ENUM
 from sqlalchemy.orm import relationship
 
@@ -25,6 +23,7 @@ from cherrytrack.constants import COORDINATES
 # metadata = Base.metadata
 
 # Used sqlacodegen to generate models.py file from schema https://pypi.org/project/sqlacodegen/
+
 
 # class AutomationSystem(Base):
 class AutomationSystem(db.Model):  # type: ignore
@@ -84,7 +83,10 @@ class SourcePlateWell(db.Model):  # type: ignore
     )
     sample_id = Column(
         String(36, "utf8mb4_unicode_ci"),
-        comment="the unique uuid identifier for the sample in this source well, passed through from the LIMS lookup API endpoint",
+        comment=(
+            "the unique uuid identifier for the sample in this source well, passed through from the LIMS lookup API "
+            "endpoint"
+        ),
     )
     rna_id = Column(
         String(255, "utf8mb4_unicode_ci"),
@@ -256,7 +258,10 @@ class RunConfiguration(db.Model):  # type: ignore
     configuration_used = Column(
         JSON,
         nullable=False,
-        comment="the json representation of the configuration extracted from the configurations table that was used for this run",
+        comment=(
+            "the json representation of the configuration extracted from the configurations table that was used for "
+            "this run"
+        ),
     )
     created_at = Column(
         DateTime,
@@ -311,7 +316,10 @@ class DestinationPlateWell(db.Model):  # type: ignore
         CheckConstraint("((`control_plate_well_id` = 1) xor (`source_plate_well_id` = 1))"),
         Index("run_destination_plate_well", "automation_system_run_id", "barcode", "coordinate", unique=True),
         {
-            "comment": "This table contains a row for each well in each destination plate, either empty or linked to a sample or control well once picked."
+            "comment": (
+                "This table contains a row for each well in each destination plate, either empty or linked to a sample "
+                "or control well once picked."
+            )
         },
     )
 
@@ -335,12 +343,18 @@ class DestinationPlateWell(db.Model):  # type: ignore
     source_plate_well_id = Column(
         ForeignKey("source_plate_wells.id"),
         index=True,
-        comment="the foreign key from the source plate wells table, uniquely identifying the source well picked into this destination well",
+        comment=(
+            "the foreign key from the source plate wells table, uniquely identifying the source well picked into this "
+            "destination well"
+        ),
     )
     control_plate_well_id = Column(
         ForeignKey("control_plate_wells.id"),
         index=True,
-        comment="the foreign key from the control plate wells table, uniquely identifying the control well picked into this destination well",
+        comment=(
+            "the foreign key from the control plate wells table, uniquely identifying the control well picked into "
+            "this destination well"
+        ),
     )
     created_at = Column(
         DateTime,

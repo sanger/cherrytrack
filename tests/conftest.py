@@ -10,7 +10,6 @@ from cherrytrack.models import (
     ControlPlateWell,
 )
 
-ControlPlateWell
 from sqlalchemy.sql import text
 from tests.fixtures.data.runs import RUNS
 from tests.fixtures.data.source_plate_wells import SOURCE_PLATE_WELLS
