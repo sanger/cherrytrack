@@ -24,6 +24,7 @@ from cherrytrack.constants import COORDINATES
 # Base = declarative_base()
 # metadata = Base.metadata
 
+# Used sqlacodegen to generate models.py file from schema https://pypi.org/project/sqlacodegen/
 
 # class AutomationSystem(Base):
 class AutomationSystem(db.Model):  # type: ignore
