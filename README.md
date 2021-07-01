@@ -67,6 +67,20 @@ To run the test suite:
 
     python -m pytest
 
+### Migrations
+
+[Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/) is a wrapper around Alembic
+
+Make sure a Database with the `DATABASE_NAME` provided in defaults.py exists
+
+To check the current state of the migrations:
+
+    flask db current
+
+To run the migrations:
+
+    flask db upgrade
+
 ## Formatting, Linting and Type Checking
 
 ### Formatting

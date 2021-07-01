@@ -1,11 +1,31 @@
-from sqlalchemy import JSON, CheckConstraint, Column, DateTime, ForeignKey, Index, Integer, String, text
+# coding: utf-8
+from sqlalchemy import (
+    BigInteger,
+    CheckConstraint,
+    Column,
+    DateTime,
+    Enum,
+    ForeignKey,
+    Index,
+    Integer,
+    JSON,
+    String,
+    Table,
+    text,
+)
 from sqlalchemy.dialects.mysql import ENUM
 from sqlalchemy.orm import relationship
+
+# from sqlalchemy.ext.declarative import declarative_base
 
 from cherrytrack import db
 from cherrytrack.constants import COORDINATES
 
+# Base = declarative_base()
+# metadata = Base.metadata
 
+
+# class AutomationSystem(Base):
 class AutomationSystem(db.Model):  # type: ignore
     __tablename__ = "automation_systems"
     __table_args__ = {"comment": "This table contains one row for each automation system (or workcell)."}
@@ -41,6 +61,7 @@ class AutomationSystem(db.Model):  # type: ignore
     )
 
 
+# class SourcePlateWell(Base):
 class SourcePlateWell(db.Model):  # type: ignore
     __tablename__ = "source_plate_wells"
     __table_args__ = (
@@ -62,10 +83,7 @@ class SourcePlateWell(db.Model):  # type: ignore
     )
     sample_id = Column(
         String(36, "utf8mb4_unicode_ci"),
-        comment=(
-            "the unique uuid identifier for the sample in this source well, passed through from the LIMS lookup API "
-            "endpoint"
-        ),
+        comment="the unique uuid identifier for the sample in this source well, passed through from the LIMS lookup API endpoint",
     )
     rna_id = Column(
         String(255, "utf8mb4_unicode_ci"),
@@ -89,14 +107,16 @@ class SourcePlateWell(db.Model):  # type: ignore
     )
 
 
+# class AutomationSystemRun(Base):
 class AutomationSystemRun(db.Model):  # type: ignore
     __tablename__ = "automation_system_runs"
-    __table_args__ = (
-        Index("automation_system_run_id", "automation_system_id", unique=True),
-        {"comment": "This table contains one row per run on an automation system."},
-    )
+    __table_args__ = {"comment": "This table contains one row per run on an automation system."}
 
-    id = Column(Integer, primary_key=True, comment="unique database identifier for this row")
+    id = Column(
+        Integer,
+        primary_key=True,
+        comment="unique database identifier for this row, used by biosero as automation_system_run_id",
+    )
     automation_system_id = Column(
         ForeignKey("automation_systems.id"),
         nullable=False,
@@ -134,6 +154,7 @@ class AutomationSystemRun(db.Model):  # type: ignore
     automation_system = relationship("AutomationSystem")
 
 
+# class Configuration(Base):
 class Configuration(db.Model):  # type: ignore
     __tablename__ = "configurations"
     __table_args__ = (
@@ -176,6 +197,7 @@ class Configuration(db.Model):  # type: ignore
     automation_system = relationship("AutomationSystem")
 
 
+# class ControlPlateWell(Base):
 class ControlPlateWell(db.Model):  # type: ignore
     __tablename__ = "control_plate_wells"
     __table_args__ = (
@@ -216,6 +238,7 @@ class ControlPlateWell(db.Model):  # type: ignore
     automation_system_run = relationship("AutomationSystemRun")
 
 
+# class RunConfiguration(Base):
 class RunConfiguration(db.Model):  # type: ignore
     __tablename__ = "run_configurations"
     __table_args__ = {
@@ -232,10 +255,7 @@ class RunConfiguration(db.Model):  # type: ignore
     configuration_used = Column(
         JSON,
         nullable=False,
-        comment=(
-            "the json representation of the configuration extracted from the configurations table that was used for "
-            "this run"
-        ),
+        comment="the json representation of the configuration extracted from the configurations table that was used for this run",
     )
     created_at = Column(
         DateTime,
@@ -253,6 +273,7 @@ class RunConfiguration(db.Model):  # type: ignore
     automation_system_run = relationship("AutomationSystemRun")
 
 
+# class RunEvent(Base):
 class RunEvent(db.Model):  # type: ignore
     __tablename__ = "run_events"
     __table_args__ = {"comment": "This table contains one row for each recorded event in a run."}
@@ -282,16 +303,14 @@ class RunEvent(db.Model):  # type: ignore
     automation_system_run = relationship("AutomationSystemRun")
 
 
+# class DestinationPlateWell(Base):
 class DestinationPlateWell(db.Model):  # type: ignore
     __tablename__ = "destination_plate_wells"
     __table_args__ = (
         CheckConstraint("((`control_plate_well_id` = 1) xor (`source_plate_well_id` = 1))"),
         Index("run_destination_plate_well", "automation_system_run_id", "barcode", "coordinate", unique=True),
         {
-            "comment": (
-                "This table contains a row for each well in each destination plate, either empty or linked to a sample "
-                "or control well once picked."
-            )
+            "comment": "This table contains a row for each well in each destination plate, either empty or linked to a sample or control well once picked."
         },
     )
 
@@ -315,18 +334,12 @@ class DestinationPlateWell(db.Model):  # type: ignore
     source_plate_well_id = Column(
         ForeignKey("source_plate_wells.id"),
         index=True,
-        comment=(
-            "the foreign key from the source plate wells table, uniquely identifying the source well picked into this "
-            "destination well"
-        ),
+        comment="the foreign key from the source plate wells table, uniquely identifying the source well picked into this destination well",
     )
     control_plate_well_id = Column(
         ForeignKey("control_plate_wells.id"),
         index=True,
-        comment=(
-            "the foreign key from the control plate wells table, uniquely identifying the control well picked into "
-            "this destination well"
-        ),
+        comment="the foreign key from the control plate wells table, uniquely identifying the control well picked into this destination well",
     )
     created_at = Column(
         DateTime,
