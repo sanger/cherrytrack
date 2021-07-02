@@ -1,4 +1,8 @@
-from cherrytrack.helpers.runs import get_run_info, get_automation_system_for_id, get_automation_system_run_for_id
+from cherrytrack.helpers.runs import (
+    get_run_info,
+    get_automation_system_for_id,
+    get_automation_system_run_for_id,
+)
 from pytest import raises
 
 
@@ -19,12 +23,9 @@ def test_get_run_info(app, client, automation_systems, runs):
 
 def test_get_run_info_failed(app, client):
     with app.app_context():
-        exception = ""
         with raises(Exception) as e:
-            exception = e
             get_run_info(1)
-
-        assert "Failed to find a automation system run with id 1" == str(exception.value)
+            assert "Failed to find a automation system run with id 1" == str(e.value)
 
 
 def test_get_automation_system_run_for_id(app, client, automation_systems, runs):
@@ -36,12 +37,9 @@ def test_get_automation_system_run_for_id(app, client, automation_systems, runs)
 
 def test_get_automation_system_run_for_id_failed(app, client):
     with app.app_context():
-        exception = ""
         with raises(Exception) as e:
-            exception = e
             get_automation_system_run_for_id(1)
-
-        assert "Failed to find a automation system run with id 1" == str(exception.value)
+            assert "Failed to find a automation system run with id 1" == str(e.value)
 
 
 def test_get_automation_system_for_id(app, client, automation_systems):
@@ -53,8 +51,6 @@ def test_get_automation_system_for_id(app, client, automation_systems):
 
 def test_get_automation_system_for_id_failed(app):
     with app.app_context():
-        exception = ""
         with raises(Exception) as e:
-            exception = e
             get_automation_system_for_id(1)
-        assert "Failed to find a automation system with id 1" == str(exception.value)
+            assert "Failed to find a automation system with id 1" == str(e.value)

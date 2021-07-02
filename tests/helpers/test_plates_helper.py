@@ -60,12 +60,9 @@ def test_get_samples_for_source_plate_successful(
 
 def test_get_samples_for_source_plate_failed(app):
     with app.app_context():
-        exception = ""
         with raises(Exception) as e:
-            exception = e
             get_samples_for_source_plate("anUnknownBarcode")
-
-        assert "Failed to find samples for source plate barcode anUnknownBarcode" == str(exception.value)
+            assert "Failed to find samples for source plate barcode anUnknownBarcode" == str(e.value)
 
 
 def test_get_wells_for_destination_plate_successful(
@@ -129,9 +126,6 @@ def test_get_wells_for_destination_plate_successful(
 
 def test_get_wells_for_destination_plate_failed(app):
     with app.app_context():
-        exception = ""
         with raises(Exception) as e:
-            exception = e
             get_wells_for_destination_plate("anUnknownBarcode")
-
-        assert "Failed to find wells for destination plate barcode anUnknownBarcode" == str(exception.value)
+            assert "Failed to find wells for destination plate barcode anUnknownBarcode" == str(e.value)
