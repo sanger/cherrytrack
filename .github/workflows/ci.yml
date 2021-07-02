@@ -110,6 +110,9 @@ jobs:
       - name: Install dependencies
         run: |
           pipenv sync --dev --system
+      - name: Create Cherrytrack testing database
+        run: |
+          python setup_psd_cherrytrack_test_db.py
       - name: Test with pytest
         run: |
           python -m pytest -x
