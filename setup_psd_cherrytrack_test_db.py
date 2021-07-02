@@ -1,4 +1,5 @@
 import cherrytrack.config.test as config
+import sqlalchemy
 
 create_engine_string = config.SQLALCHEMY_DATABASE_URI
 
