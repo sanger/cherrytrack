@@ -1,9 +1,6 @@
-from cherrytrack.helpers.runs import (
-    get_run_info,
-    get_automation_system_for_id,
-    get_automation_system_run_for_id,
-)
 from pytest import raises
+
+from cherrytrack.helpers.runs import get_automation_system_for_id, get_automation_system_run_for_id, get_run_info
 
 
 def test_get_run_info(app, client, automation_systems, runs):

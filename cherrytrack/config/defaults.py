@@ -26,10 +26,3 @@ SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DATABASE_USERNAME}:{DATABASE_PASSWO
 
 # hide deprecation warning
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-RO_CONN_STRING = f"{DATABASE_USERNAME}@{LOCALHOST}"
-TABLE_AUTOMATION_SYSTEM_RUNS = "automation_system_runs"
-TABLE_AUTOMATION_SYSTEMS = "automation_systems"
-TABLE_SOURCE_PLATE_WELLS = "source_plate_wells"
-TABLE_DESTINATION_PLATE_WELLS = "destination_plate_wells"
-TABLE_CONTROL_PLATE_WELLS = "control_plate_wells"

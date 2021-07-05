@@ -1,10 +1,11 @@
 import logging
 
 from flask import Blueprint
-from cherrytrack.responses import ok, internal_server_error
-from cherrytrack.types import FlaskResponse
+
 from cherrytrack.constants import ERROR_GET_AUTOMATION_SYSTEM_RUN_INFO
 from cherrytrack.helpers.runs import get_run_info
+from cherrytrack.responses import internal_server_error, ok
+from cherrytrack.types import FlaskResponse
 
 logger = logging.getLogger(__name__)
 

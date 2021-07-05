@@ -20,7 +20,6 @@ DATABASE_NAME = "psd_cherrytrack_test"
 ###
 SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_SERVER_HOST}:{DATABASE_SERVER_PORT}/{DATABASE_NAME}"
 
-
 ###
 # logging config
 ###

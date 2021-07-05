@@ -18,13 +18,14 @@ exposes endpoints to ease querying.
 - [Testing](#testing)
   * [Testing Requirements](#testing-requirements)
   * [Running Tests](#running-tests)
+  * [Migrations](#migrations)
 - [Formatting, Linting and Type Checking](#formatting-linting-and-type-checking)
   * [Formatting](#formatting)
   * [Linting](#linting)
   * [Type Checking](#type-checking)
 - [Deployment](#deployment)
 - [Miscellaneous](#miscellaneous)
-  * [Updating the Table of Contents [Mandatory]](#updating-the-table-of-contents-mandatory)
+  * [Updating the Table of Contents](#updating-the-table-of-contents)
 
 <!-- tocstop -->
 
@@ -71,9 +72,9 @@ To run the test suite:
 
 [Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/) is a wrapper around Alembic
 
-Make sure a Database with the `DATABASE_NAME` provided in defaults.py exists
+Make sure a database with the `DATABASE_NAME` provided in `defaults.py` exists.
 
-To check the current state of the migrations:
+To check the current state of the migrations, run:
 
     flask db current
 
@@ -112,7 +113,7 @@ The release version should align with the [standards](./standards.md).
 
 ## Miscellaneous
 
-### Updating the Table of Contents [Mandatory]
+### Updating the Table of Contents
 
 To update the table of contents after adding things to this README you can use the [markdown-toc](https://github.com/jonschlinkert/markdown-toc)
 node module. To run:

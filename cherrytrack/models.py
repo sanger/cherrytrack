@@ -1,23 +1,13 @@
 # coding: utf-8
-from sqlalchemy import (
-    CheckConstraint,
-    Column,
-    DateTime,
-    ForeignKey,
-    Index,
-    Integer,
-    JSON,
-    String,
-    text,
-)
-
+from sqlalchemy import JSON, CheckConstraint, Column, DateTime, ForeignKey, Index, Integer, String, text
 from sqlalchemy.dialects.mysql import ENUM
 from sqlalchemy.orm import relationship
 
-# from sqlalchemy.ext.declarative import declarative_base
-
 from cherrytrack import db
 from cherrytrack.constants import COORDINATES
+
+# from sqlalchemy.ext.declarative import declarative_base
+
 
 # Base = declarative_base()
 # metadata = Base.metadata
@@ -25,7 +15,6 @@ from cherrytrack.constants import COORDINATES
 # Used sqlacodegen to generate models.py file from schema https://pypi.org/project/sqlacodegen/
 
 
-# class AutomationSystem(Base):
 class AutomationSystem(db.Model):  # type: ignore
     __tablename__ = "automation_systems"
     __table_args__ = {"comment": "This table contains one row for each automation system (or workcell)."}
@@ -61,7 +50,6 @@ class AutomationSystem(db.Model):  # type: ignore
     )
 
 
-# class SourcePlateWell(Base):
 class SourcePlateWell(db.Model):  # type: ignore
     __tablename__ = "source_plate_wells"
     __table_args__ = (
@@ -110,7 +98,6 @@ class SourcePlateWell(db.Model):  # type: ignore
     )
 
 
-# class AutomationSystemRun(Base):
 class AutomationSystemRun(db.Model):  # type: ignore
     __tablename__ = "automation_system_runs"
     __table_args__ = {"comment": "This table contains one row per run on an automation system."}
@@ -157,7 +144,6 @@ class AutomationSystemRun(db.Model):  # type: ignore
     automation_system = relationship("AutomationSystem")
 
 
-# class Configuration(Base):
 class Configuration(db.Model):  # type: ignore
     __tablename__ = "configurations"
     __table_args__ = (
@@ -200,7 +186,6 @@ class Configuration(db.Model):  # type: ignore
     automation_system = relationship("AutomationSystem")
 
 
-# class ControlPlateWell(Base):
 class ControlPlateWell(db.Model):  # type: ignore
     __tablename__ = "control_plate_wells"
     __table_args__ = (
@@ -241,7 +226,6 @@ class ControlPlateWell(db.Model):  # type: ignore
     automation_system_run = relationship("AutomationSystemRun")
 
 
-# class RunConfiguration(Base):
 class RunConfiguration(db.Model):  # type: ignore
     __tablename__ = "run_configurations"
     __table_args__ = {
@@ -279,7 +263,6 @@ class RunConfiguration(db.Model):  # type: ignore
     automation_system_run = relationship("AutomationSystemRun")
 
 
-# class RunEvent(Base):
 class RunEvent(db.Model):  # type: ignore
     __tablename__ = "run_events"
     __table_args__ = {"comment": "This table contains one row for each recorded event in a run."}
@@ -309,7 +292,6 @@ class RunEvent(db.Model):  # type: ignore
     automation_system_run = relationship("AutomationSystemRun")
 
 
-# class DestinationPlateWell(Base):
 class DestinationPlateWell(db.Model):  # type: ignore
     __tablename__ = "destination_plate_wells"
     __table_args__ = (

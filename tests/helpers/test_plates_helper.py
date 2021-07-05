@@ -1,5 +1,6 @@
-from cherrytrack.helpers.plates import get_samples_for_source_plate, get_wells_for_destination_plate
 from pytest import raises
+
+from cherrytrack.helpers.plates import get_samples_for_source_plate, get_wells_for_destination_plate
 
 
 def test_get_samples_for_source_plate_successful(
