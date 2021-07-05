@@ -112,7 +112,7 @@ jobs:
           pipenv sync --dev --system
       - name: Run migrations for testing database
         run: |
-          flask db upgrade
+          SETTINGS_PATH=config/test.py flask db upgrade
       - name: Test with pytest
         run: |
           python -m pytest -x
