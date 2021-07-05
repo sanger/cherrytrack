@@ -91,7 +91,7 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: cherrytrack_test
+          MYSQL_DATABASE: psd_cherrytrack_test
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -110,6 +110,9 @@ jobs:
       - name: Install dependencies
         run: |
           pipenv sync --dev --system
+      - name: Run migrations for testing database
+        run: |
+          SETTINGS_PATH=config/test.py flask db upgrade
       - name: Test with pytest
         run: |
           python -m pytest -x

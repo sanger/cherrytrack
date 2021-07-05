@@ -1,9 +1,18 @@
+# coding: utf-8
 from sqlalchemy import JSON, CheckConstraint, Column, DateTime, ForeignKey, Index, Integer, String, text
 from sqlalchemy.dialects.mysql import ENUM
 from sqlalchemy.orm import relationship
 
 from cherrytrack import db
 from cherrytrack.constants import COORDINATES
+
+# from sqlalchemy.ext.declarative import declarative_base
+
+
+# Base = declarative_base()
+# metadata = Base.metadata
+
+# Used sqlacodegen to generate models.py file from schema https://pypi.org/project/sqlacodegen/
 
 
 class AutomationSystem(db.Model):  # type: ignore
@@ -91,19 +100,19 @@ class SourcePlateWell(db.Model):  # type: ignore
 
 class AutomationSystemRun(db.Model):  # type: ignore
     __tablename__ = "automation_system_runs"
-    __table_args__ = (
-        Index("automation_system_run_id", "system_run_id", "automation_system_id", unique=True),
-        {"comment": "This table contains one row per run on an automation system."},
-    )
+    __table_args__ = {"comment": "This table contains one row per run on an automation system."}
 
-    id = Column(Integer, primary_key=True, comment="unique database identifier for this row")
+    id = Column(
+        Integer,
+        primary_key=True,
+        comment="unique database identifier for this row, used by biosero as automation_system_run_id",
+    )
     automation_system_id = Column(
         ForeignKey("automation_systems.id"),
         nullable=False,
         index=True,
         comment="the foreign key id from the automation systems table",
     )
-    system_run_id = Column(Integer, nullable=False, comment="the run id as used by the workcell software")
     method = Column(
         String(255, "utf8mb4_unicode_ci"),
         nullable=False,

@@ -1,3 +1,21 @@
+from typing import Final
+
+###
+# Error messages
+###
+ERROR_GET_AUTOMATION_SYSTEM_RUN_INFO: Final[str] = "Failed to get automation system run info:"
+ERROR_GET_SAMPLES_FOR_SOURCE_PLATES: Final[str] = "Failed to get source plate info:"
+ERROR_GET_SAMPLES_FOR_DESTINATION_PLATES: Final[str] = "Failed to get destination plate info:"
+
+###
+# Table names
+###
+TABLE_AUTOMATION_SYSTEM_RUNS = "automation_system_runs"
+TABLE_AUTOMATION_SYSTEMS = "automation_systems"
+TABLE_SOURCE_PLATE_WELLS = "source_plate_wells"
+TABLE_DESTINATION_PLATE_WELLS = "destination_plate_wells"
+TABLE_CONTROL_PLATE_WELLS = "control_plate_wells"
+
 COORDINATES = (
     "A1",
     "A2",

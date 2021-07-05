@@ -15,16 +15,14 @@ DATABASE_SERVER_HOST = f"{LOCALHOST}"
 DATABASE_SERVER_PORT = 3306
 DATABASE_USERNAME = "root"
 DATABASE_PASSWORD = ""
-DATABASE_NAME = "cherrytrack_dev"
+DATABASE_NAME = "psd_cherrytrack_dev"
 
 ###
 # flask-sqlalchemy config
 # https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/
 # This URI needs to be overridden whenever one of the database config (above) changes
 ###
-SQLALCHEMY_DATABASE_URI = (
-    f"{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_SERVER_HOST}:{DATABASE_SERVER_PORT}/{DATABASE_NAME}"
-)
+SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_SERVER_HOST}:{DATABASE_SERVER_PORT}/{DATABASE_NAME}"
 
 # hide deprecation warning
 SQLALCHEMY_TRACK_MODIFICATIONS = False

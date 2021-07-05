@@ -14,6 +14,7 @@ exposes endpoints to ease querying.
 - [Requirements for Development](#requirements-for-development)
 - [Getting Started](#getting-started)
   * [Setup Steps](#setup-steps)
+  * [Migrations](#migrations)
 - [Running](#running)
 - [Testing](#testing)
   * [Testing Requirements](#testing-requirements)
@@ -24,7 +25,7 @@ exposes endpoints to ease querying.
   * [Type Checking](#type-checking)
 - [Deployment](#deployment)
 - [Miscellaneous](#miscellaneous)
-  * [Updating the Table of Contents [Mandatory]](#updating-the-table-of-contents-mandatory)
+  * [Updating the Table of Contents](#updating-the-table-of-contents)
 
 <!-- tocstop -->
 
@@ -45,7 +46,19 @@ Install the require dependencies:
 
 Create the following database (currently manually):
 
-- `cherrytrack_dev`
+- `psd_cherrytrack_dev`
+
+### Migrations
+
+[Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/) is a wrapper around Alembic
+
+To check the current state of the migrations, run:
+
+    flask db current
+
+To run the migrations:
+
+    flask db upgrade
 
 ## Running
 
@@ -59,13 +72,19 @@ To run the application:
 
 Create the following database (currently manually):
 
-- `cherrytrack_test`
+- `psd_cherrytrack_test`
+
+Migrate the test database:
+
+    SETTINGS_PATH=config/test.py flask db upgrade
 
 ### Running Tests
 
 To run the test suite:
 
     python -m pytest
+
+
 
 ## Formatting, Linting and Type Checking
 
@@ -98,7 +117,7 @@ The release version should align with the [standards](./standards.md).
 
 ## Miscellaneous
 
-### Updating the Table of Contents [Mandatory]
+### Updating the Table of Contents
 
 To update the table of contents after adding things to this README you can use the [markdown-toc](https://github.com/jonschlinkert/markdown-toc)
 node module. To run:

@@ -11,6 +11,7 @@
           - "3306:3306"
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_DATABASE: psd_cherrytrack_dev
         volumes:
           - mysql-volume:/var/lib/mysql
 
