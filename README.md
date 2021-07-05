@@ -14,11 +14,11 @@ exposes endpoints to ease querying.
 - [Requirements for Development](#requirements-for-development)
 - [Getting Started](#getting-started)
   * [Setup Steps](#setup-steps)
+  * [Migrations](#migrations)
 - [Running](#running)
 - [Testing](#testing)
   * [Testing Requirements](#testing-requirements)
   * [Running Tests](#running-tests)
-  * [Migrations](#migrations)
 - [Formatting, Linting and Type Checking](#formatting-linting-and-type-checking)
   * [Formatting](#formatting)
   * [Linting](#linting)
@@ -48,6 +48,18 @@ Create the following database (currently manually):
 
 - `psd_cherrytrack_dev`
 
+### Migrations
+
+[Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/) is a wrapper around Alembic
+
+To check the current state of the migrations, run:
+
+    flask db current
+
+To run the migrations:
+
+    flask db upgrade
+
 ## Running
 
 To run the application:
@@ -62,25 +74,17 @@ Create the following database (currently manually):
 
 - `psd_cherrytrack_test`
 
+Migrate the test database:
+
+    SETTINGS_PATH=config/test.py flask db upgrade
+
 ### Running Tests
 
 To run the test suite:
 
     python -m pytest
 
-### Migrations
 
-[Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/) is a wrapper around Alembic
-
-Make sure a database with the `DATABASE_NAME` provided in `defaults.py` exists.
-
-To check the current state of the migrations, run:
-
-    flask db current
-
-To run the migrations:
-
-    flask db upgrade
 
 ## Formatting, Linting and Type Checking
 
