@@ -29,9 +29,9 @@ def upgrade():
         """
         CREATE DEFINER=`root`@`%` PROCEDURE `createControlPlateWellsRecord`(
           IN input_automation_system_run_id INT,
-          IN input_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_control VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+          IN input_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_control VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
         )
         BEGIN
           INSERT INTO `control_plate_wells` (
@@ -60,8 +60,8 @@ def upgrade():
         """
         CREATE DEFINER=`root`@`%` PROCEDURE `createEmptyDestinationPlateWellsRecord`(
           IN input_automation_system_run_id INT,
-          IN input_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+          IN input_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
 
         )
         BEGIN
@@ -119,9 +119,9 @@ def upgrade():
     op.execute(
         """
         CREATE DEFINER=`root`@`%` PROCEDURE `createRunRecord`(
-          IN input_automation_system_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_gbg_method_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_user_id VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+          IN input_automation_system_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_gbg_method_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_user_id VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
           OUT output_automation_system_run_id INT
         )
         BEGIN
@@ -196,11 +196,11 @@ def upgrade():
     op.execute(
         """
         CREATE DEFINER=`root`@`%` PROCEDURE `createSourcePlateWellRecord`(
-          IN input_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_sample_id VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_rna_id VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_lab_id VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+          IN input_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_sample_id VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_rna_id VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_lab_id VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
         )
         BEGIN
           INSERT INTO `source_plate_wells` (
@@ -229,7 +229,7 @@ def upgrade():
     op.execute(
         """
         CREATE DEFINER=`root`@`%` PROCEDURE `getConfigurationForSystem`(
-          IN input_automation_system_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+          IN input_automation_system_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
         )
         BEGIN
           SELECT conf.config_key, conf.config_value
@@ -247,7 +247,7 @@ def upgrade():
     op.execute(
         """
         CREATE DEFINER=`root`@`%` PROCEDURE `getDetailsForDestinationPlate`(
-          IN input_destination_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+          IN input_destination_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
         )
         BEGIN
             SELECT slv.*
@@ -263,7 +263,7 @@ def upgrade():
     op.execute(
         """
         CREATE DEFINER=`root`@`%` PROCEDURE `getPickableSamplesForSourcePlate`(
-          IN input_source_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+          IN input_source_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
         )
         BEGIN
             SELECT
@@ -292,10 +292,10 @@ def upgrade():
         """
         CREATE DEFINER=`root`@`%` PROCEDURE `updateDestinationPlateWellWithControl`(
           IN input_automation_system_run_id INT,
-          IN input_destination_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_destination_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_control_plate_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_control_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+          IN input_destination_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_destination_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_control_plate_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_control_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
         )
         BEGIN
 
@@ -321,10 +321,10 @@ def upgrade():
         """
         CREATE DEFINER=`root`@`%` PROCEDURE `updateDestinationPlateWellWithSource`(
           IN input_automation_system_run_id INT,
-          IN input_destination_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_destination_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_source_plate_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-          IN input_source_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+          IN input_destination_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_destination_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_source_plate_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+          IN input_source_coordinate VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
         )
         BEGIN
 

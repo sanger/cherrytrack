@@ -21,18 +21,18 @@ class AutomationSystem(db.Model):  # type: ignore
 
     id = Column(Integer, primary_key=True, comment="unique database identifier for this row")
     automation_system_name = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         unique=True,
         comment="the name for the workcell as used by the lab staff",
     )
     automation_system_manufacturer = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         comment="used to distinguish groups of workcells supplied by different manufacturers",
     )
     liquid_handler_serial_number = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         comment="the serial number of the liquid handler on the workcell",
     )
@@ -59,7 +59,7 @@ class SourcePlateWell(db.Model):  # type: ignore
 
     id = Column(Integer, primary_key=True, comment="unique database identifier for this row")
     barcode = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         index=True,
         comment="the barcode for this plate, as scanned from the label",
@@ -70,18 +70,18 @@ class SourcePlateWell(db.Model):  # type: ignore
         comment="the coordinate of this well within the plate",
     )
     sample_id = Column(
-        String(36, "utf8mb4_unicode_ci"),
+        String(36, "utf8mb4_0900_ai_ci"),
         comment=(
             "the unique uuid identifier for the sample in this source well, passed through from the LIMS lookup API "
             "endpoint"
         ),
     )
     rna_id = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         comment="the rna id identifier for the sample, passed through from the LIMS lookup API endpoint",
     )
     lab_id = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         comment="the lighthouse lab id, passed through from the LIMS lookup API endpoint",
     )
     created_at = Column(
@@ -114,12 +114,12 @@ class AutomationSystemRun(db.Model):  # type: ignore
         comment="the foreign key id from the automation systems table",
     )
     method = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         comment="the name of the method running on the workcell, including a version number",
     )
     user_id = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         comment="the user id of the lab staff member performing the run",
     )
@@ -158,15 +158,15 @@ class Configuration(db.Model):  # type: ignore
         comment="the foreign key id from the automation systems table",
     )
     config_key = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         comment="the key or name for this configuration key value pair",
     )
     config_value = Column(
-        String(255, "utf8mb4_unicode_ci"), nullable=False, comment="the value for this configuration key value pair"
+        String(255, "utf8mb4_0900_ai_ci"), nullable=False, comment="the value for this configuration key value pair"
     )
     description = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         comment="the description of what this key value pairing is used for",
     )
@@ -200,7 +200,7 @@ class ControlPlateWell(db.Model):  # type: ignore
         comment="the foreign key id from the automation system runs table, uniquely identifying the run",
     )
     barcode = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         comment="the barcode for this plate, as scanned from the label",
     )
@@ -312,7 +312,7 @@ class DestinationPlateWell(db.Model):  # type: ignore
         comment="the foreign key id from the automation system runs table, uniquely identifying the run",
     )
     barcode = Column(
-        String(255, "utf8mb4_unicode_ci"),
+        String(255, "utf8mb4_0900_ai_ci"),
         nullable=False,
         index=True,
         comment="the barcode for this plate, as scanned from the label",
