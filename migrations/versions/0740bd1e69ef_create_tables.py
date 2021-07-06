@@ -5,8 +5,8 @@ Revises:
 Create Date: 2021-07-01 16:15:35.307607
 
 """
-from alembic import op
 import sqlalchemy as sa
+from alembic import op
 from sqlalchemy.dialects import mysql
 
 # revision identifiers, used by Alembic.
@@ -23,19 +23,19 @@ def upgrade():
         sa.Column("id", sa.Integer(), nullable=False, comment="unique database identifier for this row"),
         sa.Column(
             "automation_system_name",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the name for the workcell as used by the lab staff",
         ),
         sa.Column(
             "automation_system_manufacturer",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="used to distinguish groups of workcells supplied by different manufacturers",
         ),
         sa.Column(
             "liquid_handler_serial_number",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the serial number of the liquid handler on the workcell",
         ),
@@ -62,7 +62,7 @@ def upgrade():
         sa.Column("id", sa.Integer(), nullable=False, comment="unique database identifier for this row"),
         sa.Column(
             "barcode",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the barcode for this plate, as scanned from the label",
         ),
@@ -171,19 +171,19 @@ def upgrade():
         ),
         sa.Column(
             "sample_id",
-            sa.String(length=36, collation="utf8mb4_unicode_ci"),
+            sa.String(length=36, collation="utf8mb4_0900_ai_ci"),
             nullable=True,
             comment="the unique uuid identifier for the sample in this source well, passed through from the LIMS lookup API endpoint",
         ),
         sa.Column(
             "rna_id",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=True,
             comment="the rna id identifier for the sample, passed through from the LIMS lookup API endpoint",
         ),
         sa.Column(
             "lab_id",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=True,
             comment="the lighthouse lab id, passed through from the LIMS lookup API endpoint",
         ),
@@ -222,13 +222,13 @@ def upgrade():
         ),
         sa.Column(
             "method",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the name of the method running on the workcell, including a version number",
         ),
         sa.Column(
             "user_id",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the user id of the lab staff member performing the run",
         ),
@@ -286,19 +286,19 @@ def upgrade():
         ),
         sa.Column(
             "config_key",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the key or name for this configuration key value pair",
         ),
         sa.Column(
             "config_value",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the value for this configuration key value pair",
         ),
         sa.Column(
             "description",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the description of what this key value pairing is used for",
         ),
@@ -337,7 +337,7 @@ def upgrade():
         ),
         sa.Column(
             "barcode",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the barcode for this plate, as scanned from the label",
         ),
@@ -556,7 +556,7 @@ def upgrade():
         ),
         sa.Column(
             "barcode",
-            sa.String(length=255, collation="utf8mb4_unicode_ci"),
+            sa.String(length=255, collation="utf8mb4_0900_ai_ci"),
             nullable=False,
             comment="the barcode for this plate, as scanned from the label",
         ),
