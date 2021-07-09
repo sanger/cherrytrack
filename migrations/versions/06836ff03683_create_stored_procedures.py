@@ -285,6 +285,25 @@ def upgrade():
         {"db_username": db_username},
     )
 
+    # doesSourcePlateExist
+    conn.execute(
+        text(
+            """
+            CREATE DEFINER=:db_username@`%` PROCEDURE `doesSourcePlateExist`(
+            IN input_source_barcode VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
+            )
+            BEGIN
+                SELECT EXISTS(
+                    SELECT id
+                    FROM `source_plate_wells`
+                    WHERE barcode = input_source_barcode
+                );
+            END
+            """
+        ),
+        {"db_username": db_username},
+    )
+
     # getPickableSamplesForSourcePlate
     conn.execute(
         text(
