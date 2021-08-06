@@ -19,10 +19,10 @@ depends_on = None
 def upgrade():
     # create index just on run, as there is a forign key constrait, a foreign key always requires an index
     op.create_index(
-        "automation_system_run_id",
+        "automation_system_run_id_index",
         "destination_plate_wells",
         ["automation_system_run_id"],
-        unique=True,
+        unique=False,
     )
 
     # drop the index
@@ -30,16 +30,17 @@ def upgrade():
 
     # create the new index
     op.create_index(
-        "destination_plate_well",
+        "barcode_coordinate_index",
         "destination_plate_wells",
         ["barcode", "coordinate"],
         unique=True,
     )
 
 
+
 def downgrade():
     # remove the new index
-    op.drop_index("destination_plate_well", "destination_plate_wells")
+    op.drop_index("barcode_coordinate_index", "destination_plate_wells")
 
     # recreate the old index
     op.create_index(
@@ -50,4 +51,4 @@ def downgrade():
     )
 
     # drop the run only index
-    op.drop_index("automation_system_run_id", "destination_plate_wells")
+    op.drop_index("automation_system_run_id_index", "destination_plate_wells")
