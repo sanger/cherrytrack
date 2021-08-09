@@ -17,7 +17,7 @@ depends_on = None
 
 
 def upgrade():
-    # create index just on run, as there is a forign key constrait, a foreign key always requires an index
+    # create index just on run, as there is a foreign key constrait, a foreign key always requires an index
     op.create_index(
         "automation_system_run_id_index",
         "destination_plate_wells",
