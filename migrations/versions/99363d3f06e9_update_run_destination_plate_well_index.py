@@ -37,7 +37,6 @@ def upgrade():
     )
 
 
-
 def downgrade():
     # remove the new index
     op.drop_index("barcode_coordinate_index", "destination_plate_wells")
