@@ -69,6 +69,7 @@ def get_wells_for_destination_plate(destination_barcode: str) -> List[Dict[str, 
         .filter(DestinationPlateWell.barcode == destination_barcode)
         .outerjoin(SourcePlateWell, DestinationPlateWell.source_plate_well_id == SourcePlateWell.id)
         .outerjoin(ControlPlateWell, DestinationPlateWell.control_plate_well_id == ControlPlateWell.id)
+        .order_by(DestinationPlateWell.id)
         .all()
     )
 
