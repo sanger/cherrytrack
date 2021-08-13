@@ -12,10 +12,11 @@ from sqlalchemy.sql import text
 
 
 # revision identifiers, used by Alembic.
-revision = 'caf31d80b88e'
-down_revision = '997dcbb7b16e'
+revision = "caf31d80b88e"
+down_revision = "997dcbb7b16e"
 branch_labels = None
 depends_on = None
+
 
 def drop_stored_procedure(procedure_name: str) -> None:
     if procedure_name is None or not procedure_name:
@@ -23,13 +24,14 @@ def drop_stored_procedure(procedure_name: str) -> None:
 
     op.execute(f"DROP PROCEDURE IF EXISTS `{procedure_name}`;")
 
+
 def upgrade():
     db_username = current_app.config["DATABASE_USERNAME"]
 
     # https://stackoverflow.com/a/23206636
     conn = op.get_bind()
 
-    drop_stored_procedure("updateDestinationPlateWellWithControl")
+    drop_stored_procedure("createRunRecord")
 
     conn.execute(
         text(
@@ -136,7 +138,7 @@ def downgrade():
     # https://stackoverflow.com/a/23206636
     conn = op.get_bind()
 
-    drop_stored_procedure("updateDestinationPlateWellWithControl")
+    drop_stored_procedure("createRunRecord")
 
     conn.execute(
         text(
