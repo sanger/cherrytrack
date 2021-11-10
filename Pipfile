@@ -8,6 +8,7 @@ flask-migrate = "~=3.0"
 gunicorn = "~=20.1"
 pymysql = "~=1.0"
 slackclient = "~=2.9"
+flask-cors = "*"
 
 [dev-packages]
 black = "*"

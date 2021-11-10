@@ -18,10 +18,12 @@ def get_samples_for_source_plate(source_barcode: str) -> List[Dict[str, Union[bo
             SourcePlateWell.sample_id,
             SourcePlateWell.rna_id,
             SourcePlateWell.lab_id,
+            SourcePlateWell.created_at,
             DestinationPlateWell.automation_system_run_id,
             DestinationPlateWell.id.label("destination_plate_well_id"),
             DestinationPlateWell.barcode.label("destination_barcode"),
             DestinationPlateWell.coordinate.label("destination_coordinate"),
+            DestinationPlateWell.updated_at.label("date_picked"),
         )
         .filter(SourcePlateWell.barcode == source_barcode)
         .outerjoin(DestinationPlateWell, SourcePlateWell.id == DestinationPlateWell.source_plate_well_id)
@@ -35,11 +37,12 @@ def get_samples_for_source_plate(source_barcode: str) -> List[Dict[str, Union[bo
     for row in query_results:
         samples.append(
             {
-                "picked": bool(row.automation_system_run_id),
                 "automation_system_run_id": row.automation_system_run_id or "",
                 "destination_barcode": row.destination_barcode or "",
                 "destination_coordinate": row.destination_coordinate or "",
+                "created_at": row.created_at or "",
                 **get_well_content(row),
+                **get_well_picked_status(row),
             }
         )
 
@@ -55,6 +58,8 @@ def get_wells_for_destination_plate(destination_barcode: str) -> List[Dict[str, 
             DestinationPlateWell.id.label("destination_plate_well_id"),
             DestinationPlateWell.barcode.label("destination_barcode"),
             DestinationPlateWell.coordinate.label("destination_coordinate"),
+            DestinationPlateWell.created_at,
+            DestinationPlateWell.updated_at.label("date_picked"),
             SourcePlateWell.id.label("source_plate_well_id"),
             SourcePlateWell.barcode.label("source_barcode"),
             SourcePlateWell.coordinate.label("source_coordinate"),
@@ -82,11 +87,20 @@ def get_wells_for_destination_plate(destination_barcode: str) -> List[Dict[str, 
             {
                 "automation_system_run_id": row.automation_system_run_id,
                 "destination_coordinate": row.destination_coordinate,
+                "date_picked": row.date_picked or "",
+                "created_at": row.created_at or "",
                 **get_well_content(row),
             }
         )
 
     return samples
+
+
+def get_well_picked_status(row):
+    if row.automation_system_run_id:
+        return {"picked": True, "date_picked": row.date_picked}
+    else:
+        return {"picked": False, "date_picked": ""}
 
 
 def get_well_content(row):

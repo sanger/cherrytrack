@@ -27,6 +27,8 @@ def test_get_samples_for_source_plate_successful(
                 "rna_id": "RNA-S-00001-00000008",
                 "lab_id": "MK",
                 "lh_sample_uuid": "487e1b70-ad22-4716-a913-1001bc89d559",
+                "created_at": actual[0]['created_at'],
+                "date_picked": actual[0]['date_picked']
             },
             {
                 "automation_system_run_id": 1,
@@ -39,6 +41,8 @@ def test_get_samples_for_source_plate_successful(
                 "rna_id": "RNA-S-00001-00000001",
                 "lab_id": "MK",
                 "lh_sample_uuid": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
+                "created_at": actual[1]['created_at'],
+                "date_picked": actual[1]['date_picked']
             },
             {
                 "automation_system_run_id": "",
@@ -51,12 +55,15 @@ def test_get_samples_for_source_plate_successful(
                 "rna_id": "RNA-S-00001-00000009",
                 "lab_id": "MK",
                 "lh_sample_uuid": "c068cfea-02be-4aec-a50d-631abcd34573",
+                "created_at": actual[2]['created_at'],
+                "date_picked": ""
             },
         ]
 
         # compare list of dicts
         pairs = zip(actual, expected)
-        assert any(x != y for x, y in pairs)
+        for x, y in pairs:
+            assert x == y
 
 
 def test_get_samples_for_source_plate_failed(app):
@@ -88,6 +95,20 @@ def test_get_wells_for_destination_plate_successful(
                 "rna_id": "RNA-S-00001-00000008",
                 "lab_id": "MK",
                 "lh_sample_uuid": "487e1b70-ad22-4716-a913-1001bc89d559",
+                "created_at": actual[0]['created_at'],
+                "date_picked": actual[0]['date_picked']
+            },
+            {
+                "automation_system_run_id": 1,
+                "destination_coordinate": "B2",
+                "type": "sample",
+                "source_barcode": "DS000010002",
+                "source_coordinate": "A3",
+                "rna_id": "RNA-S-00001-00000004",
+                "lab_id": "MK",
+                "lh_sample_uuid": "6254c4c9-73ad-42e3-9926-af329f8a090f",
+                "created_at": actual[1]['created_at'],
+                "date_picked": actual[1]['date_picked']
             },
             {
                 "automation_system_run_id": 1,
@@ -98,31 +119,32 @@ def test_get_wells_for_destination_plate_successful(
                 "rna_id": "RNA-S-00001-00000001",
                 "lab_id": "MK",
                 "lh_sample_uuid": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
+                "created_at": actual[2]['created_at'],
+                "date_picked": actual[2]['date_picked']
             },
             {
-                "automation_system_run_id": "1",
+                "automation_system_run_id": 1,
                 "destination_coordinate": "A1",
-                "type": "sample",
-                "source_barcode": "DS000010001",
-                "source_coordinate": "B2",
-                "rna_id": "RNA-S-00001-00000009",
-                "lab_id": "MK",
-                "lh_sample_uuid": "c068cfea-02be-4aec-a50d-631abcd34573",
-            },
-            {
-                "automation_system_run_id": "1",
-                "destination_coordinate": "E3",
                 "type": "control",
                 "control_barcode": "DS000010012",
                 "control_coordinate": "B7",
                 "control": "positive",
+                "created_at": actual[3]['created_at'],
+                "date_picked": actual[3]['date_picked']
             },
-            {"automation_system_run_id": "1", "destination_coordinate": "", "type": "empty"},
+            {
+                "automation_system_run_id": 1,
+                "destination_coordinate": "E3",
+                "type": "empty",
+                "created_at": actual[4]['created_at'],
+                "date_picked": actual[4]['date_picked']
+            },
         ]
 
         # compare list of dicts
         pairs = zip(actual, expected)
-        assert any(x != y for x, y in pairs)
+        for x, y in pairs:
+            assert x == y
 
 
 def test_get_wells_for_destination_plate_failed(app):
