@@ -13,6 +13,7 @@ def test_get_samples_for_source_plate_successful(
 ):
     with app.app_context():
         source_plate_barcode = source_plate_wells[0].barcode
+        timestamp = source_plate_wells[0].created_at
         actual = get_samples_for_source_plate(source_plate_barcode)
 
         expected = [
@@ -27,8 +28,8 @@ def test_get_samples_for_source_plate_successful(
                 "rna_id": "RNA-S-00001-00000008",
                 "lab_id": "MK",
                 "lh_sample_uuid": "487e1b70-ad22-4716-a913-1001bc89d559",
-                "created_at": actual[0]["created_at"],
-                "date_picked": actual[0]["date_picked"],
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
                 "automation_system_run_id": 1,
@@ -41,8 +42,8 @@ def test_get_samples_for_source_plate_successful(
                 "rna_id": "RNA-S-00001-00000001",
                 "lab_id": "MK",
                 "lh_sample_uuid": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
-                "created_at": actual[1]["created_at"],
-                "date_picked": actual[1]["date_picked"],
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
                 "automation_system_run_id": "",
@@ -55,15 +56,13 @@ def test_get_samples_for_source_plate_successful(
                 "rna_id": "RNA-S-00001-00000009",
                 "lab_id": "MK",
                 "lh_sample_uuid": "c068cfea-02be-4aec-a50d-631abcd34573",
-                "created_at": actual[2]["created_at"],
+                "created_at": timestamp,
                 "date_picked": "",
             },
         ]
 
-        # compare list of dicts
-        pairs = zip(actual, expected)
-        for x, y in pairs:
-            assert x == y
+        for sample in actual:
+            assert sample in expected
 
 
 def test_get_samples_for_source_plate_failed(app):
@@ -83,6 +82,7 @@ def test_get_wells_for_destination_plate_successful(
 ):
     with app.app_context():
         destination_plate_barcode = destination_plate_wells[0].barcode
+        timestamp = destination_plate_wells[0].created_at
         actual = get_wells_for_destination_plate(destination_plate_barcode)
 
         expected = [
@@ -95,8 +95,8 @@ def test_get_wells_for_destination_plate_successful(
                 "rna_id": "RNA-S-00001-00000008",
                 "lab_id": "MK",
                 "lh_sample_uuid": "487e1b70-ad22-4716-a913-1001bc89d559",
-                "created_at": actual[0]["created_at"],
-                "date_picked": actual[0]["date_picked"],
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
                 "automation_system_run_id": 1,
@@ -107,8 +107,8 @@ def test_get_wells_for_destination_plate_successful(
                 "rna_id": "RNA-S-00001-00000004",
                 "lab_id": "MK",
                 "lh_sample_uuid": "6254c4c9-73ad-42e3-9926-af329f8a090f",
-                "created_at": actual[1]["created_at"],
-                "date_picked": actual[1]["date_picked"],
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
                 "automation_system_run_id": 1,
@@ -119,8 +119,8 @@ def test_get_wells_for_destination_plate_successful(
                 "rna_id": "RNA-S-00001-00000001",
                 "lab_id": "MK",
                 "lh_sample_uuid": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
-                "created_at": actual[2]["created_at"],
-                "date_picked": actual[2]["date_picked"],
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
                 "automation_system_run_id": 1,
@@ -129,22 +129,20 @@ def test_get_wells_for_destination_plate_successful(
                 "control_barcode": "DS000010012",
                 "control_coordinate": "B7",
                 "control": "positive",
-                "created_at": actual[3]["created_at"],
-                "date_picked": actual[3]["date_picked"],
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
                 "automation_system_run_id": 1,
                 "destination_coordinate": "E3",
                 "type": "empty",
-                "created_at": actual[4]["created_at"],
-                "date_picked": actual[4]["date_picked"],
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
         ]
 
-        # compare list of dicts
-        pairs = zip(actual, expected)
-        for x, y in pairs:
-            assert x == y
+        for sample in actual:
+            assert sample in expected
 
 
 def test_get_wells_for_destination_plate_failed(app):
