@@ -1,7 +1,6 @@
 import logging
 
 from flask import Blueprint
-from flask_cors import CORS
 from cherrytrack.constants import ERROR_GET_SAMPLES_FOR_DESTINATION_PLATES, ERROR_GET_SAMPLES_FOR_SOURCE_PLATES
 from cherrytrack.helpers.plates import get_samples_for_source_plate, get_wells_for_destination_plate
 from cherrytrack.responses import internal_server_error, ok
@@ -10,7 +9,6 @@ from cherrytrack.types import FlaskResponse
 logger = logging.getLogger(__name__)
 
 bp = Blueprint("plates", __name__)
-cors = CORS(bp)
 
 
 @bp.get("/destination-plates/<string:barcode>")
