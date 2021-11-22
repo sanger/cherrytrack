@@ -87,8 +87,8 @@ def get_wells_for_destination_plate(destination_barcode: str) -> List[Dict[str, 
             {
                 "automation_system_run_id": row.automation_system_run_id,
                 "destination_coordinate": row.destination_coordinate,
-                "date_picked": row.date_picked or "",
                 "created_at": row.created_at or "",
+                **get_well_picked_status(row),
                 **get_well_content(row),
             }
         )
@@ -97,7 +97,11 @@ def get_wells_for_destination_plate(destination_barcode: str) -> List[Dict[str, 
 
 
 def get_well_picked_status(row):
-    if row.automation_system_run_id:
+    """
+    If the outerjoin does not contain a destination well id and a source or control well id,
+    the destination well is 'empty' and hence it has not been picked
+    """
+    if row.destination_plate_well_id and (row.source_plate_well_id or row.control_plate_well_id):
         return {"picked": True, "date_picked": row.date_picked}
     else:
         return {"picked": False, "date_picked": ""}
