@@ -48,6 +48,11 @@ Create the following database (currently manually):
 
 - `psd_cherrytrack_dev`
 
+To generate dummy data for this project you can use SQL statements from:
+
+- [Biosero-SQL](https://github.com/sanger/biosero-sql).
+In particular see biosero-sql/example-queries which can be run manually on `psd_cherrytrack_dev`
+
 ### Migrations
 
 [Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/) is a wrapper around Alembic

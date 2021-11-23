@@ -13,6 +13,7 @@ def test_get_samples_for_source_plate_successful(
 ):
     with app.app_context():
         source_plate_barcode = source_plate_wells[0].barcode
+        timestamp = source_plate_wells[0].created_at
         actual = get_samples_for_source_plate(source_plate_barcode)
 
         expected = [
@@ -27,6 +28,8 @@ def test_get_samples_for_source_plate_successful(
                 "rna_id": "RNA-S-00001-00000008",
                 "lab_id": "MK",
                 "lh_sample_uuid": "487e1b70-ad22-4716-a913-1001bc89d559",
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
                 "automation_system_run_id": 1,
@@ -39,6 +42,8 @@ def test_get_samples_for_source_plate_successful(
                 "rna_id": "RNA-S-00001-00000001",
                 "lab_id": "MK",
                 "lh_sample_uuid": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
                 "automation_system_run_id": "",
@@ -51,12 +56,13 @@ def test_get_samples_for_source_plate_successful(
                 "rna_id": "RNA-S-00001-00000009",
                 "lab_id": "MK",
                 "lh_sample_uuid": "c068cfea-02be-4aec-a50d-631abcd34573",
+                "created_at": timestamp,
+                "date_picked": "",
             },
         ]
 
-        # compare list of dicts
-        pairs = zip(actual, expected)
-        assert any(x != y for x, y in pairs)
+        for sample in actual:
+            assert sample in expected
 
 
 def test_get_samples_for_source_plate_failed(app):
@@ -76,6 +82,7 @@ def test_get_wells_for_destination_plate_successful(
 ):
     with app.app_context():
         destination_plate_barcode = destination_plate_wells[0].barcode
+        timestamp = destination_plate_wells[0].created_at
         actual = get_wells_for_destination_plate(destination_plate_barcode)
 
         expected = [
@@ -88,6 +95,22 @@ def test_get_wells_for_destination_plate_successful(
                 "rna_id": "RNA-S-00001-00000008",
                 "lab_id": "MK",
                 "lh_sample_uuid": "487e1b70-ad22-4716-a913-1001bc89d559",
+                "picked": True,
+                "created_at": timestamp,
+                "date_picked": timestamp,
+            },
+            {
+                "automation_system_run_id": 1,
+                "destination_coordinate": "B2",
+                "type": "sample",
+                "source_barcode": "DS000010002",
+                "source_coordinate": "A3",
+                "rna_id": "RNA-S-00001-00000004",
+                "lab_id": "MK",
+                "lh_sample_uuid": "6254c4c9-73ad-42e3-9926-af329f8a090f",
+                "picked": True,
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
                 "automation_system_run_id": 1,
@@ -98,31 +121,33 @@ def test_get_wells_for_destination_plate_successful(
                 "rna_id": "RNA-S-00001-00000001",
                 "lab_id": "MK",
                 "lh_sample_uuid": "499324b8-e4cc-4baf-a1a5-86a3a449b573",
+                "picked": True,
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
             {
-                "automation_system_run_id": "1",
+                "automation_system_run_id": 1,
                 "destination_coordinate": "A1",
-                "type": "sample",
-                "source_barcode": "DS000010001",
-                "source_coordinate": "B2",
-                "rna_id": "RNA-S-00001-00000009",
-                "lab_id": "MK",
-                "lh_sample_uuid": "c068cfea-02be-4aec-a50d-631abcd34573",
-            },
-            {
-                "automation_system_run_id": "1",
-                "destination_coordinate": "E3",
                 "type": "control",
                 "control_barcode": "DS000010012",
                 "control_coordinate": "B7",
                 "control": "positive",
+                "picked": True,
+                "created_at": timestamp,
+                "date_picked": timestamp,
             },
-            {"automation_system_run_id": "1", "destination_coordinate": "", "type": "empty"},
+            {
+                "automation_system_run_id": 1,
+                "destination_coordinate": "E3",
+                "type": "empty",
+                "picked": False,
+                "created_at": timestamp,
+                "date_picked": "",
+            },
         ]
 
-        # compare list of dicts
-        pairs = zip(actual, expected)
-        assert any(x != y for x, y in pairs)
+        for sample in actual:
+            assert sample in expected
 
 
 def test_get_wells_for_destination_plate_failed(app):
