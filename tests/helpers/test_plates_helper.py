@@ -63,6 +63,7 @@ def test_get_samples_for_source_plate_successful(
 
         for sample in actual:
             assert sample in expected
+        assert len(actual) == len(expected)
 
 
 def test_get_samples_for_source_plate_failed(app):
@@ -148,6 +149,7 @@ def test_get_wells_for_destination_plate_successful(
 
         for sample in actual:
             assert sample in expected
+        assert len(actual) == len(expected)
 
 
 def test_get_wells_for_destination_plate_failed(app):
