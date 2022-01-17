@@ -5,6 +5,8 @@ DESTINATION_PLATE_WELLS = [
         "automation_system_run_id": 1,
         "source_plate_well_id": 1,
         "control_plate_well_id": None,
+        "created_at": "2021-10-27 09:00:00",
+        "updated_at": "2021-10-27 09:00:00",
     },
     {
         "barcode": "DS000010021",
@@ -12,6 +14,8 @@ DESTINATION_PLATE_WELLS = [
         "automation_system_run_id": 1,
         "source_plate_well_id": 2,
         "control_plate_well_id": None,
+        "created_at": "2021-10-27 09:00:00",
+        "updated_at": "2021-10-27 09:00:00",
     },
     {
         "barcode": "DS000010021",
@@ -19,6 +23,8 @@ DESTINATION_PLATE_WELLS = [
         "automation_system_run_id": 1,
         "source_plate_well_id": 3,
         "control_plate_well_id": None,
+        "created_at": "2021-10-27 09:00:00",
+        "updated_at": "2021-10-27 09:00:00",
     },
     {
         "barcode": "DS000010021",
@@ -26,6 +32,8 @@ DESTINATION_PLATE_WELLS = [
         "automation_system_run_id": 1,
         "source_plate_well_id": None,
         "control_plate_well_id": 1,
+        "created_at": "2021-10-27 09:00:00",
+        "updated_at": "2021-10-27 09:00:00",
     },
     {
         "barcode": "DS000010021",
@@ -33,5 +41,7 @@ DESTINATION_PLATE_WELLS = [
         "automation_system_run_id": 1,
         "source_plate_well_id": None,
         "control_plate_well_id": None,
+        "created_at": "2021-10-27 09:00:00",
+        "updated_at": "2021-10-27 09:00:00",
     },
 ]
