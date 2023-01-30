@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask-migrate = "~=3.1"
+flask-migrate = "~=4.0"
 gunicorn = "~=20.1"
 pymysql = "~=1.0"
 slackclient = "~=2.9"
