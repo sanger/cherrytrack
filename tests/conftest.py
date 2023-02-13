@@ -122,4 +122,4 @@ def delete_data(model, table_name):
     model.query.delete()
     db.session.commit()
     sql = text(f"ALTER TABLE {table_name} AUTO_INCREMENT = 1")
-    db.session.execute(sql)
+    db.engine.execute(sql)
