@@ -24,7 +24,7 @@ def get_samples_for_source_plate(source_barcode: str) -> List[Dict[str, Union[bo
             DestinationPlateWell.barcode.label("destination_barcode"),
             DestinationPlateWell.coordinate.label("destination_coordinate"),
             DestinationPlateWell.updated_at.label("date_picked"),
-        )
+        )  # type: ignore
         .filter(SourcePlateWell.barcode == source_barcode)
         .outerjoin(DestinationPlateWell, SourcePlateWell.id == DestinationPlateWell.source_plate_well_id)
         .all()
@@ -70,7 +70,7 @@ def get_wells_for_destination_plate(destination_barcode: str) -> List[Dict[str, 
             ControlPlateWell.barcode.label("control_barcode"),
             ControlPlateWell.coordinate.label("control_coordinate"),
             ControlPlateWell.control,
-        )
+        )  # type: ignore
         .filter(DestinationPlateWell.barcode == destination_barcode)
         .outerjoin(SourcePlateWell, DestinationPlateWell.source_plate_well_id == SourcePlateWell.id)
         .outerjoin(ControlPlateWell, DestinationPlateWell.control_plate_well_id == ControlPlateWell.id)
