@@ -29,7 +29,7 @@ def test_get_automation_system_run_for_id(app, client, automation_systems, runs)
     with app.app_context():
         run = runs[0]
         actual = get_automation_system_run_for_id(run.id)
-        assert actual == run
+        assert actual.id == run.id
 
 
 def test_get_automation_system_run_for_id_failed(app, client):
@@ -43,7 +43,7 @@ def test_get_automation_system_for_id(app, client, automation_systems):
     with app.app_context():
         automation_system = automation_systems[0]
         actual = get_automation_system_for_id(automation_system.id)
-        assert actual == automation_system
+        assert actual.id == automation_system.id
 
 
 def test_get_automation_system_for_id_failed(app):
