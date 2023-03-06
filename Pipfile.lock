@@ -894,11 +894,11 @@
         },
         "flake8-bugbear": {
             "hashes": [
-                "sha256:db5d7a831ef4412a224b26c708967ff816818cabae415e76b8c58df156c4b8e5",
-                "sha256:e450976a07e4f9d6c043d4f72b17ec1baf717fe37f7997009c8ae58064f88305"
+                "sha256:39259814a83f33c8409417ee12dd4050c9c0bb4c8707c12fc18ae62b2f3ddee1",
+                "sha256:f136bd0ca2684f101168bba2310dec541e11aa6b252260c17dcf58d18069a740"
             ],
             "index": "pypi",
-            "version": "==22.7.1"
+            "version": "==23.2.13"
         },
         "iniconfig": {
             "hashes": [
