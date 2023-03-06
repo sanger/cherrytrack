@@ -23,7 +23,6 @@ def test_get_source_plates_endpoint_successful(
 def test_get_source_plates_endpoint_successful_fails(app, client):
     with app.app_context():
         with patch("cherrytrack.blueprints.plates.get_samples_for_source_plate", side_effect=Exception()):
-
             response = client.get("/source-plates/anUnknownBarcode")
 
             assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
@@ -72,7 +71,6 @@ def test_get_destination_plates_endpoint_successful(
 def test_get_destination_plates_endpoint_fails(app, client):
     with app.app_context():
         with patch("cherrytrack.blueprints.plates.get_wells_for_destination_plate", side_effect=Exception()):
-
             response = client.get("/destination-plates/anUnknownBarcode")
 
             assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR

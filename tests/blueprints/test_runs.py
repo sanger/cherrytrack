@@ -13,7 +13,6 @@ def test_get_automation_system_runs_endpoint_successful(app, client):
         }
 
         with patch("cherrytrack.blueprints.runs.get_run_info", return_value=run_info):
-
             response = client.get("/automation-system-runs/1")
 
             assert response.status_code == HTTPStatus.OK
@@ -24,7 +23,6 @@ def test_get_automation_system_runs_endpoint_successful(app, client):
 def test_get_automation_system_runs_endpoint_get_run_info_fails(app, client):
     with app.app_context():
         with patch("cherrytrack.blueprints.runs.get_run_info", side_effect=Exception()):
-
             response = client.get("/automation-system-runs/1")
 
             assert response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR
