@@ -5,16 +5,18 @@ on:
     branches:
       - develop
       - main
+      - dpl-785-remove-old-releases
 
 env:
   IMAGE_NAME: ${{ github.repository }}/${{ github.event.repository.name }}
 
-permissions:
-  packages: write
-
 jobs:
   build_test_release_push:
     runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+
     services:
       mysql:
         image: mysql:8.0
