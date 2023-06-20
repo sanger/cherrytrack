@@ -14,9 +14,6 @@ jobs:
   build_test_release_push:
     runs-on: ubuntu-latest
 
-    # permissions:
-    #   packages: write
-
     services:
       mysql:
         image: mysql:8.0
@@ -93,7 +90,7 @@ jobs:
         uses: snok/container-retention-policy@v2
         with:
           image-names: ${{ github.event.repository.name }}/*
-          cut-off: Ten months ago UTC
+          cut-off: Four months ago UTC
           timestamp-to-use: updated_at
           account-type: org
           org-name: sanger
