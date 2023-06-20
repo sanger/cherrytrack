@@ -14,8 +14,8 @@ jobs:
   build_test_release_push:
     runs-on: ubuntu-latest
 
-    permissions:
-      packages: write
+    # permissions:
+    #   packages: write
 
     services:
       mysql:
