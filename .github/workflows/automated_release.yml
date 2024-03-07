@@ -5,7 +5,6 @@ on:
     branches:
       - develop
       - main
-      - dpl-785-remove-old-releases
 
 env:
   IMAGE_NAME: ${{ github.repository }}/${{ github.event.repository.name }}
