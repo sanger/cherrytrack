@@ -5,6 +5,7 @@ Revises: 997dcbb7b16e
 Create Date: 2021-08-13 11:17:09.793241
 
 """
+
 import sqlalchemy as sa
 from alembic import op
 from flask import current_app
