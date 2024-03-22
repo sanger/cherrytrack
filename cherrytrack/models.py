@@ -65,7 +65,7 @@ class SourcePlateWell(db.Model):  # type: ignore
         comment="the barcode for this plate, as scanned from the label",
     )
     coordinate = Column(
-        ENUM(*COORDINATES),
+        ENUM(*COORDINATES),  # type: ignore
         nullable=False,
         comment="the coordinate of this well within the plate",
     )
@@ -108,7 +108,7 @@ class AutomationSystemRun(db.Model):  # type: ignore
         comment="unique database identifier for this row, used by biosero as automation_system_run_id",
     )
     automation_system_id = Column(
-        ForeignKey("automation_systems.id"),
+        ForeignKey("automation_systems.id"),  # type: ignore
         nullable=False,
         index=True,
         comment="the foreign key id from the automation systems table",
@@ -127,7 +127,9 @@ class AutomationSystemRun(db.Model):  # type: ignore
         DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"), comment="the date time when the run started"
     )
     end_time = Column(DateTime, comment="the date time when the run ended, whether completed or aborted")
-    state = Column(ENUM("started", "completed", "aborted"), nullable=False, comment="the state of the run")
+    state = Column(
+        ENUM("started", "completed", "aborted"), nullable=False, comment="the state of the run"
+    )  # type: ignore
     created_at = Column(
         DateTime,
         nullable=False,
@@ -153,7 +155,7 @@ class Configuration(db.Model):  # type: ignore
 
     id = Column(Integer, primary_key=True, comment="unique database identifier for this row")
     automation_system_id = Column(
-        ForeignKey("automation_systems.id"),
+        ForeignKey("automation_systems.id"),  # type: ignore
         nullable=False,
         comment="the foreign key id from the automation systems table",
     )
@@ -195,7 +197,7 @@ class ControlPlateWell(db.Model):  # type: ignore
 
     id = Column(Integer, primary_key=True, comment="unique database identifier for this row")
     automation_system_run_id = Column(
-        ForeignKey("automation_system_runs.id"),
+        ForeignKey("automation_system_runs.id"),  # type: ignore
         nullable=False,
         comment="the foreign key id from the automation system runs table, uniquely identifying the run",
     )
@@ -205,11 +207,11 @@ class ControlPlateWell(db.Model):  # type: ignore
         comment="the barcode for this plate, as scanned from the label",
     )
     coordinate = Column(
-        ENUM(*COORDINATES),
+        ENUM(*COORDINATES),  # type: ignore
         nullable=False,
         comment="the coordinate of this well within the plate",
     )
-    control = Column(ENUM("positive", "negative"), comment="the type of control in this well")
+    control = Column(ENUM("positive", "negative"), comment="the type of control in this well")  # type: ignore
     created_at = Column(
         DateTime,
         nullable=False,
@@ -234,7 +236,7 @@ class RunConfiguration(db.Model):  # type: ignore
 
     id = Column(Integer, primary_key=True, comment="unique database identifier for this row")
     automation_system_run_id = Column(
-        ForeignKey("automation_system_runs.id"),
+        ForeignKey("automation_system_runs.id"),  # type: ignore
         nullable=False,
         unique=True,
         comment="the foreign key id from the automation system runs table, uniquely identifying the run",
@@ -269,12 +271,12 @@ class RunEvent(db.Model):  # type: ignore
 
     id = Column(Integer, primary_key=True, comment="unique database identifier for this row")
     automation_system_run_id = Column(
-        ForeignKey("automation_system_runs.id"),
+        ForeignKey("automation_system_runs.id"),  # type: ignore
         nullable=False,
         index=True,
         comment="the foreign key id from the automation system runs table, uniquely identifying the run",
     )
-    type = Column(ENUM("info", "warning", "error"), comment="the type of the event being logged")
+    type = Column(ENUM("info", "warning", "error"), comment="the type of the event being logged")  # type: ignore
     event = Column(JSON, nullable=False, comment="the json representation of the event information")
     created_at = Column(
         DateTime,
@@ -307,7 +309,7 @@ class DestinationPlateWell(db.Model):  # type: ignore
 
     id = Column(Integer, primary_key=True, comment="unique database identifier for this row")
     automation_system_run_id = Column(
-        ForeignKey("automation_system_runs.id"),
+        ForeignKey("automation_system_runs.id"),  # type: ignore
         nullable=False,
         comment="the foreign key id from the automation system runs table, uniquely identifying the run",
     )
@@ -318,12 +320,12 @@ class DestinationPlateWell(db.Model):  # type: ignore
         comment="the barcode for this plate, as scanned from the label",
     )
     coordinate = Column(
-        ENUM(*COORDINATES),
+        ENUM(*COORDINATES),  # type: ignore
         nullable=False,
         comment="the coordinate of this well within the plate",
     )
     source_plate_well_id = Column(
-        ForeignKey("source_plate_wells.id"),
+        ForeignKey("source_plate_wells.id"),  # type: ignore
         index=True,
         comment=(
             "the foreign key from the source plate wells table, uniquely identifying the source well picked into this "
@@ -331,7 +333,7 @@ class DestinationPlateWell(db.Model):  # type: ignore
         ),
     )
     control_plate_well_id = Column(
-        ForeignKey("control_plate_wells.id"),
+        ForeignKey("control_plate_wells.id"),  # type: ignore
         index=True,
         comment=(
             "the foreign key from the control plate wells table, uniquely identifying the control well picked into "

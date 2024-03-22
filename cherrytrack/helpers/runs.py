@@ -8,14 +8,14 @@ logger = logging.getLogger(__name__)
 
 def get_run_info(id: int) -> Dict[str, Union[int, str]]:
     run = get_automation_system_run_for_id(id)
-    automation_system = get_automation_system_for_id(run.automation_system_id)
+    automation_system = get_automation_system_for_id(run.automation_system_id)  # type: ignore
 
     return {
-        "id": run.id,
-        "user_id": run.user_id,
-        "liquid_handler_serial_number": automation_system.liquid_handler_serial_number,
-        "automation_system_name": automation_system.automation_system_name,
-        "automation_system_manufacturer": automation_system.automation_system_manufacturer,
+        "id": run.id,  # type: ignore
+        "user_id": run.user_id,  # type: ignore
+        "liquid_handler_serial_number": automation_system.liquid_handler_serial_number,  # type: ignore
+        "automation_system_name": automation_system.automation_system_name,  # type: ignore
+        "automation_system_manufacturer": automation_system.automation_system_manufacturer,  # type: ignore
     }
 
 
