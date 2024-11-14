@@ -23,7 +23,7 @@ jobs:
           MYSQL_DATABASE: psd_cherrytrack_test
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - uses: nelonoel/branch-name@v1.0.1
 
