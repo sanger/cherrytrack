@@ -21,7 +21,7 @@ pytest-cov = "*"
 python-dotenv = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.13"
 
 [pipenv]
 allow_prereleases = true
